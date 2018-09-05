@@ -10,7 +10,6 @@ import boto3
 import time
 from common_functions import usage
 from common_functions import update_custom_cookbooks_usage
-from common_functions import output_summary
 
 if sys.argv[1] == "update-custom-cookbooks":
 
@@ -37,7 +36,7 @@ if sys.argv[1] == "update-custom-cookbooks":
             update_custom_cookbooks_usage()
             sys.exit(2)
 
-    #instances_lt = int(instances) + 1
+    # instances_lt = int(instances) + 1
     print "running update_custom_cookbooks"
     # initiate boto3 client
     client = boto3.client('opsworks', region_name=region)

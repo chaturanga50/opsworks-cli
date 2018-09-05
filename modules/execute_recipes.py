@@ -10,7 +10,6 @@ import boto3
 import time
 from common_functions import usage
 from common_functions import execute_recipes_usage
-from common_functions import output_summary
 
 if sys.argv[1] == "execute-recipes":
 
@@ -39,7 +38,7 @@ if sys.argv[1] == "execute-recipes":
             execute_recipes_usage()
             sys.exit(2)
 
-    #instances_lt = int(instances) + 1
+    # instances_lt = int(instances) + 1
     print "running execute_recipe with " + str(cookbook)
     # initiate boto3 client
     client = boto3.client('opsworks', region_name=region)
