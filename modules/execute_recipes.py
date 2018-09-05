@@ -8,14 +8,13 @@ import sys
 import getopt
 import boto3
 import time
-from common_functions import usage
-from common_functions import execute_recipes_usage
+from common_functions import *
 
-if sys.argv[1] == "execute-recipes":
 
+def execute_recipes():
     try:
-        opts, args = getopt.getopt(sys.argv[2:], 'r:s:l:i:c:h', [
-            'region=', 'stack=', 'layer=', 'instances=', 'cookbook=', 'help'
+        opts, args = getopt.getopt(sys.argv[2:], 'r:s:l:i:c:j:h', [
+            'region=', 'stack=', 'layer=', 'instances=', 'cookbook=', 'custom-json=', 'help'
         ])
     except getopt.GetoptError:
         execute_recipes_usage()
@@ -34,90 +33,60 @@ if sys.argv[1] == "execute-recipes":
             instances = arg
         elif opt in ('-c', '--cookbook'):
             cookbook = arg
+        elif opt in ('-j', '--custom-json'):
+            custom_json = arg
         else:
             execute_recipes_usage()
             sys.exit(2)
-
-    # instances_lt = int(instances) + 1
-    print "running execute_recipe with " + str(cookbook)
-    # initiate boto3 client
-    client = boto3.client('opsworks', region_name=region)
-    # calling deployment to specified stack layer
-    run_recipes = client.create_deployment(
-        StackId=stack,
-        LayerIds=[
-            layer,
-        ],
-        Command={
-            'Name': 'execute_recipes',
-            'Args': {
-                'recipes': [
-                    cookbook,
-                ]
-            }
-        },
-        Comment='automated execute_recipes job'
-    )
+    try:
+        custom_json
+    except NameError:
+        custom_json = {}
+    try:
+        layer
+    except NameError:
+        layer = None
+    if layer is None:
+        print "running execute_recipe with " + str(cookbook) + "and Custom-Json" + str(custom_json)
+        # initiate boto3 client
+        client = boto3.client('opsworks', region_name=region)
+        # calling deployment to specified stack layer
+        run_recipes = client.create_deployment(
+            StackId=stack,
+            Command={
+                'Name': 'execute_recipes',
+                'Args': {
+                    'recipes': [
+                        cookbook,
+                    ]
+                }
+            },
+            Comment='automated execute_recipes job',
+            CustomJson= custom_json
+        )
+    else:
+        #instances_lt = int(instances) + 1
+        print "running execute_recipe with " + str(cookbook)+ "and Custom-Json" + str(custom_json)
+        # initiate boto3 client
+        client = boto3.client('opsworks', region_name=region)
+        # calling deployment to specified stack layer
+        run_recipes = client.create_deployment(
+            StackId=stack,
+            LayerIds=[
+                layer,
+            ],
+            Command={
+                'Name': 'execute_recipes',
+                'Args': {
+                    'recipes': [
+                        cookbook,
+                    ]
+                }
+            },
+            Comment='automated execute_recipes job',
+            CustomJson= custom_json
+        )
 
     deploymentId = run_recipes['DeploymentId']
     # sending describe command to get status"""  """
-    describe_deployment = client.describe_commands(
-        DeploymentId=deploymentId
-    )
-
-    try:
-        success_count = 0
-        while success_count == 0:
-            print "Deployment not completed yet..waiting 10 seconds before send request back to aws..."
-            time.sleep(10)
-            describe_deployment = client.describe_commands(
-                DeploymentId=deploymentId)
-            success_count = str(describe_deployment).count("successful")
-            skipped_count = str(describe_deployment).count("skipped")
-            failed_count = str(describe_deployment).count("failed")
-            if int(success_count) + int(skipped_count) == int(instances):
-                success_count = int(instances)
-            elif int(skipped_count) == int(instances):
-                skipped_count = int(instances)
-            elif int(failed_count) == int(instances):
-                failed_count = int(instances)
-            elif int(skipped_count) + int(failed_count) == int(instances):
-                fail_skip_count = int(instances)
-        if success_count == int(instances):
-            print "Deployment completed...\n"
-            print "Summary: \n success instances: " + \
-                str(success_count) + "\n skipped instances: " + \
-                str(skipped_count) + "\n failed count: " + \
-                str(failed_count) + "\n"
-            print "Check the deployment logs...\n"
-            for logs in describe_deployment['Commands']:
-                print logs['LogUrl']
-        elif skipped_count == int(instances):
-            print "Deployment skipped...\n"
-            print "Summary: \n success instances: " + \
-                str(success_count) + "\n skipped instances: " + \
-                str(skipped_count) + "\n failed count: " + \
-                str(failed_count) + "\n"
-            print "Check the deployment logs...\n"
-            for logs in describe_deployment['Commands']:
-                print logs['LogUrl']
-        elif failed_count == int(instances):
-            print "Deployment failed...\n"
-            print "Summary: \n success instances: " + \
-                str(success_count) + "\n skipped instances: " + \
-                str(skipped_count) + "\n failed count: " + \
-                str(failed_count) + "\n"
-            print "Check the deployment logs...\n"
-            for logs in describe_deployment['Commands']:
-                print logs['LogUrl']
-        elif fail_skip_count == int(instances):
-            print "Deployment failed and some of them skipped..."
-            print "Summary: \n success instances: " + \
-                str(success_count) + "\n skipped instances: " + \
-                str(skipped_count) + "\n failed count: " + \
-                str(failed_count) + "\n"
-            print "Check the deployment logs...\n"
-            for logs in describe_deployment['Commands']:
-                print logs['LogUrl']
-    except Exception, e:
-        print e
+    get_status(deploymentId,region,instances)

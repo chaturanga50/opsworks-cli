@@ -6,7 +6,15 @@ import sys
 import getopt
 import boto3
 import time
-from modules import common_help
-from modules import execute_recipes
-from modules import update_custom_cookbooks
-from modules import setup
+import modules
+
+if sys.argv[0] == "opsworks-cli":
+    modules.usage()
+elif sys.argv[1] == "execute-recipes":
+    modules.execute_recipes()
+elif sys.argv[1] == "update-custom-cookbooks":
+    modules.execute_recipes()
+elif sys.argv[1] == "setup":
+    modules.setup()
+else:
+    modules.common_help()
