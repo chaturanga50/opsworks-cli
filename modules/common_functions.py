@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # Copyright 2018 Chathuranga Abeyrathna. All Rights Reserved.
 # AWS OpsWorks deployment cli
-# verson 1.0
+
 # common help
 
 import sys

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # Copyright 2018 Chathuranga Abeyrathna. All Rights Reserved.
 # AWS OpsWorks deployment cli
-# verson 1.0
+
 # update custom cookbooks
 
 import sys
@@ -79,15 +79,39 @@ if sys.argv[1] == "update-custom-cookbooks":
                 fail_skip_count = int(instances)
         if success_count == int(instances):
             print "Deployment completed...\n"
-            output_summary()
+            print "Summary: \n success instances: " + \
+                str(success_count) + "\n skipped instances: " + \
+                str(skipped_count) + "\n failed count: " + \
+                str(failed_count) + "\n"
+            print "Check the deployment logs...\n"
+            for logs in describe_deployment['Commands']:
+                print logs['LogUrl']
         elif skipped_count == int(instances):
             print "Deployment skipped...\n"
-            output_summary()
+            print "Summary: \n success instances: " + \
+                str(success_count) + "\n skipped instances: " + \
+                str(skipped_count) + "\n failed count: " + \
+                str(failed_count) + "\n"
+            print "Check the deployment logs...\n"
+            for logs in describe_deployment['Commands']:
+                print logs['LogUrl']
         elif failed_count == int(instances):
             print "Deployment failed...\n"
-            output_summary()
+            print "Summary: \n success instances: " + \
+                str(success_count) + "\n skipped instances: " + \
+                str(skipped_count) + "\n failed count: " + \
+                str(failed_count) + "\n"
+            print "Check the deployment logs...\n"
+            for logs in describe_deployment['Commands']:
+                print logs['LogUrl']
         elif fail_skip_count == int(instances):
             print "Deployment failed and some of them skipped..."
-            output_summary()
+            print "Summary: \n success instances: " + \
+                str(success_count) + "\n skipped instances: " + \
+                str(skipped_count) + "\n failed count: " + \
+                str(failed_count) + "\n"
+            print "Check the deployment logs...\n"
+            for logs in describe_deployment['Commands']:
+                print logs['LogUrl']
     except Exception, e:
         print e
