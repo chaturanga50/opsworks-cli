@@ -2,8 +2,6 @@
 # Copyright 2018 Chathuranga Abeyrathna. All Rights Reserved.
 # AWS OpsWorks deployment cli
 
-# common help
-
 import sys
 import getopt
 from common_functions import usage
