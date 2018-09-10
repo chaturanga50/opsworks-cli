@@ -35,7 +35,6 @@ def setup():
             setup_usage()
             sys.exit(2)
 
-    # instances_lt = int(instances) + 1
     print "running setup..."
     # initiate boto3 client
     client = boto3.client('opsworks', region_name=region)
@@ -53,4 +52,4 @@ def setup():
 
     deploymentId = run_setup['DeploymentId']
     # sending describe command to get status"""  """
-    get_status(deploymentId, region,instances)
+    get_status(deploymentId, region, instances)

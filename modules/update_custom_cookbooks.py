@@ -10,6 +10,7 @@ import boto3
 import time
 from common_functions import *
 
+
 def update_custom_cookbooks():
     try:
         opts, args = getopt.getopt(sys.argv[2:], 'r:s:l:i:h', [
@@ -34,7 +35,6 @@ def update_custom_cookbooks():
             update_custom_cookbooks_usage()
             sys.exit(2)
 
-    # instances_lt = int(instances) + 1
     print "running update_custom_cookbooks"
     # initiate boto3 client
     client = boto3.client('opsworks', region_name=region)
@@ -52,4 +52,4 @@ def update_custom_cookbooks():
 
     deploymentId = run_update_custom_cookbooks['DeploymentId']
     # sending describe command to get status"""  """
-    get_status(deploymentId,region,instances)
+    get_status(deploymentId, region, instances)
