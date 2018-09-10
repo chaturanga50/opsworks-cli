@@ -8,10 +8,11 @@ import sys
 import getopt
 from common_functions import usage
 
+
 def common_help():
     try:
         opts, args = getopt.getopt(sys.argv[1:], 'h', [
-                                'help'])
+            'help'])
     except getopt.GetoptError:
         usage()
         sys.exit(2)

@@ -5,9 +5,9 @@ notifications:
   email:
     - chaturanga50@gmail.com
 install:
-  - pip install pep8
+  - pip install pycodestyle
   - python setup.py install
 env:
   - BOTO_CONFIG=/tmp/nowhere
 script:
-  - "pep8 --ignore=E501,E225,W293,E731 modules"
+  - "pycodestyle --ignore=E501,E225,W293,E731,W292 modules"

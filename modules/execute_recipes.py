@@ -62,10 +62,9 @@ def execute_recipes():
                 }
             },
             Comment='automated execute_recipes job',
-            CustomJson= custom_json
+            CustomJson=custom_json
         )
     else:
-        #instances_lt = int(instances) + 1
         print "running execute_recipe with " + str(cookbook)+ "and Custom-Json" + str(custom_json)
         # initiate boto3 client
         client = boto3.client('opsworks', region_name=region)
@@ -84,9 +83,9 @@ def execute_recipes():
                 }
             },
             Comment='automated execute_recipes job',
-            CustomJson= custom_json
+            CustomJson=custom_json
         )
 
     deploymentId = run_recipes['DeploymentId']
     # sending describe command to get status"""  """
-    get_status(deploymentId,region,instances)
+    get_status(deploymentId, region, instances)

@@ -10,6 +10,7 @@ import boto3
 import time
 from common_functions import *
 
+
 def setup():
     try:
         opts, args = getopt.getopt(sys.argv[2:], 'r:s:l:i:h', [
@@ -52,4 +53,4 @@ def setup():
 
     deploymentId = run_setup['DeploymentId']
     # sending describe command to get status"""  """
-    get_status(deploymentId,region,instances)
+    get_status(deploymentId, region,instances)

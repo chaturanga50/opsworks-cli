@@ -9,6 +9,7 @@ import getopt
 import boto3
 import time
 
+
 def usage():
     print 'usage: aws-opsworks [options] <command> <subcommand> [<subcommand> ...] [parameters]\n'
     print 'To see help text, you can run: \n' + \
@@ -31,7 +32,8 @@ def setup_usage():
     print 'usage: \n' + \
         sys.argv[1] + ' --region [region] --stack [opsworks_stack_id] --layer [opsworks_layer_id] --instances [opsworks_layer_instance_count]'
 
-def get_status(deploymentId,region,instances):
+
+def get_status(deploymentId, region, instances):
     client = boto3.client('opsworks', region_name=region)
     describe_deployment = client.describe_commands(
         DeploymentId=deploymentId
