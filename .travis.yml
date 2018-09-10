@@ -1,13 +1,19 @@
 language: python
 python:
-  - 2.7
+  - "2.7"
 notifications:
   email:
     - chaturanga50@gmail.com
 install:
   - pip install pycodestyle
   - python setup.py install
+  - pip install -r requirements.txt
 env:
   - BOTO_CONFIG=/tmp/nowhere
 script:
+  - "python opsworks-cli"
+  - "python opsworks-cli -h"
+  - "python opsworks-cli execute-recipes -h"
+  - "python opsworks-cli update-custom-cookbooks -h"
+  - "python opsworks-cli setup -h"
   - "pycodestyle --ignore=E501,E225,W293,E731,W292 modules"
