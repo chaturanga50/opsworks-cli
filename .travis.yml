@@ -6,8 +6,8 @@ notifications:
     - chaturanga50@gmail.com
 install:
   - pip install pycodestyle
-  - python setup.py install
   - pip install -r requirements.txt
+  - python setup.py install
 env:
   - BOTO_CONFIG=/tmp/nowhere
 script:
