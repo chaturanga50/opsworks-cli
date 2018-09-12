@@ -18,6 +18,10 @@ def usage():
     print 'available options:\n - execute-recipes\n - update-custom-cookbooks\n - setup\n'
 
 
+def version():
+    print '0.4.0'
+
+
 def execute_recipes_usage():
     print 'usage: \n' + \
         sys.argv[1] + ' --region [region] --stack [opsworks_stack_id] --layer [opsworks_layer_id] --instances [opsworks_layer_instance_count] --cookbook [cookbook] --custom-json [custom-json]'

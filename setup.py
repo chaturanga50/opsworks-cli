@@ -2,6 +2,7 @@ from setuptools import setup, find_packages
 from codecs import open
 from os import path
 from io import open
+import modules
 
 setup(
     name='opsworks-cli',
@@ -11,6 +12,6 @@ setup(
     author_email='chaturanga50@gmail.com',
     packages=find_packages(),
     include_package_data=True,
-    version='0.3.9',
+    version=version(),
     scripts=['opsworks-cli']
 )
