@@ -16,10 +16,7 @@ def usage():
           sys.argv[0] + ' --help \n' + \
           sys.argv[0] + ' [options] --help \n'
     print 'available options:\n - execute-recipes\n - update-custom-cookbooks\n - setup\n'
-
-
-def version():
-    print '0.4.0'
+    exit(0)
 
 
 def execute_recipes_usage():
@@ -102,3 +99,8 @@ def get_status(deploymentId, region, instances):
                 print logs['LogUrl']
     except Exception, e:
         print e
+
+
+def version():
+    print '0.4.0'
+    exit(0)
