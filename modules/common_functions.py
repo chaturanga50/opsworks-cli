@@ -20,7 +20,7 @@ def usage():
 
 def execute_recipes_usage():
     print 'usage: \n' + \
-        sys.argv[1] + ' --region [region] --stack [opsworks_stack_id] --layer [opsworks_layer_id] --instances [opsworks_layer_instance_count] --cookbook [cookbook]\n --custom-json [{"lamp":{ "packages": { "app--sso": "17.1.6" } } }]'
+        sys.argv[1] + ' --region [region] --stack [opsworks_stack_id] --layer [opsworks_layer_id] --instances [opsworks_layer_instance_count] --cookbook [cookbook] --custom-json [custom-json]'
 
 
 def update_custom_cookbooks_usage():

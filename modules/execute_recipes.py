@@ -22,7 +22,6 @@ def execute_recipes():
     for opt, arg in opts:
         if opt in ('-h', '--help'):
             execute_recipes_usage()
-            sys.exit(2)
         elif opt in ('-r', '--region'):
             region = arg
         elif opt in ('-s', '--stack'):

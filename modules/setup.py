@@ -22,7 +22,6 @@ def setup():
     for opt, arg in opts:
         if opt in ('-h', '--help'):
             setup_usage()
-            sys.exit(2)
         elif opt in ('-r', '--region'):
             region = arg
         elif opt in ('-s', '--stack'):

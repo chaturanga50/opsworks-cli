@@ -22,7 +22,6 @@ def update_custom_cookbooks():
     for opt, arg in opts:
         if opt in ('-h', '--help'):
             update_custom_cookbooks_usage()
-            sys.exit(2)
         elif opt in ('-r', '--region'):
             region = arg
         elif opt in ('-s', '--stack'):
