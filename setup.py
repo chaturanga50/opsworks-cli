@@ -11,6 +11,6 @@ setup(
     author_email='chaturanga50@gmail.com',
     packages=find_packages(),
     include_package_data=True,
-    version='0.3.8',
+    version='0.3.9',
     scripts=['opsworks-cli']
 )

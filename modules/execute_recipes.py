@@ -41,7 +41,7 @@ def execute_recipes():
     try:
         custom_json
     except NameError:
-        custom_json = {}
+        custom_json = str({})
     try:
         layer
     except NameError:
@@ -65,7 +65,7 @@ def execute_recipes():
             CustomJson=custom_json
         )
     else:
-        print "running execute_recipe with " + str(cookbook)+ "and Custom-Json" + str(custom_json)
+        print "running execute_recipe with " + str(cookbook)+ "without custom json"
         # initiate boto3 client
         client = boto3.client('opsworks', region_name=region)
         # calling deployment to specified stack layer
@@ -82,8 +82,7 @@ def execute_recipes():
                     ]
                 }
             },
-            Comment='automated execute_recipes job',
-            CustomJson=custom_json
+            Comment='automated execute_recipes job'
         )
 
     deploymentId = run_recipes['DeploymentId']
