@@ -18,7 +18,7 @@ def common_help():
     for opt, arg in opts:
         if opt in ('-h', '--help'):
             usage()
-            sys.exit(2)
+            sys.exit(0)
         else:
             usage()
-            sys.exit(2)
+            sys.exit(0)
