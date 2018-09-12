@@ -32,7 +32,6 @@ def setup():
             instances = arg
         else:
             setup_usage()
-            sys.exit(2)
 
     print "running setup..."
     # initiate boto3 client

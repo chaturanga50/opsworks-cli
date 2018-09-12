@@ -32,7 +32,6 @@ def update_custom_cookbooks():
             instances = arg
         else:
             update_custom_cookbooks_usage()
-            sys.exit(2)
 
     print "running update_custom_cookbooks"
     # initiate boto3 client

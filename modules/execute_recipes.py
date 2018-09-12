@@ -36,7 +36,6 @@ def execute_recipes():
             custom_json = arg
         else:
             execute_recipes_usage()
-            sys.exit(2)
     try:
         custom_json
     except NameError:

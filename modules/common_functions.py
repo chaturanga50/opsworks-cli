@@ -21,16 +21,19 @@ def usage():
 def execute_recipes_usage():
     print 'usage: \n' + \
         sys.argv[1] + ' --region [region] --stack [opsworks_stack_id] --layer [opsworks_layer_id] --instances [opsworks_layer_instance_count] --cookbook [cookbook] --custom-json [custom-json]'
+    exit(1)
 
 
 def update_custom_cookbooks_usage():
     print 'usage: \n' + \
         sys.argv[1] + ' --region [region] --stack [opsworks_stack_id] --layer [opsworks_layer_id] --instances [opsworks_layer_instance_count]\n'
+    exit(1)
 
 
 def setup_usage():
     print 'usage: \n' + \
         sys.argv[1] + ' --region [region] --stack [opsworks_stack_id] --layer [opsworks_layer_id] --instances [opsworks_layer_instance_count]'
+    exit(1)
 
 
 def get_status(deploymentId, region, instances):
