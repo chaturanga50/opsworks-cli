@@ -53,6 +53,7 @@ def get_status(deploymentId, region, instances):
             success_count = str(describe_deployment).count("successful")
             skipped_count = str(describe_deployment).count("skipped")
             failed_count = str(describe_deployment).count("failed")
+            fail_skip_count = int(skipped_count) + int(failed_count)
             if int(success_count) + int(skipped_count) == int(instances):
                 success_count = int(instances)
             elif int(skipped_count) == int(instances):
@@ -102,5 +103,5 @@ def get_status(deploymentId, region, instances):
 
 
 def version():
-    print '0.4.2'
+    print '0.4.3'
     exit(0)

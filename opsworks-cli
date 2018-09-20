@@ -13,7 +13,7 @@ if 'opsworks-cli' in sys.argv[0] and len(sys.argv) > 1:
     if sys.argv[1] == "execute-recipes":
         modules.execute_recipes()    
     elif sys.argv[1] == "update-custom-cookbooks":
-        modules.execute_recipes()
+        modules.update_custom_cookbooks()
     elif sys.argv[1] == "setup":
         modules.setup()
     else:
