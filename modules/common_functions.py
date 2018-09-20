@@ -102,5 +102,5 @@ def get_status(deploymentId, region, instances):
 
 
 def version():
-    print '0.4.0'
+    print '0.4.2'
     exit(0)

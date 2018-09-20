@@ -12,6 +12,9 @@ setup(
     author_email='chaturanga50@gmail.com',
     packages=find_packages(),
     include_package_data=True,
-    version=modules.version(),
+    version='0.4.2',
+    install_requires=[
+        'boto3'
+    ],
     scripts=['opsworks-cli']
 )

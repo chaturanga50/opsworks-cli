@@ -8,7 +8,8 @@ import boto3
 import time
 import modules
 
-if sys.argv[0] == "opsworks-cli" and len(sys.argv) > 1:
+#if sys.argv[0] == "opsworks-cli" and len(sys.argv) > 1:
+if 'opsworks-cli' in sys.argv[0] and len(sys.argv) > 1:
     if sys.argv[1] == "execute-recipes":
         modules.execute_recipes()    
     elif sys.argv[1] == "update-custom-cookbooks":
