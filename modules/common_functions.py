@@ -63,43 +63,62 @@ def get_status(deploymentId, region, instances):
             elif int(skipped_count) + int(failed_count) == int(instances):
                 fail_skip_count = int(instances)
         if success_count == int(instances):
-            print "Deployment completed...\n"
+            print "\nDeployment completed..."
             print "Summary: \n success instances: " + \
                 str(success_count) + "\n skipped instances: " + \
-                str(skipped_count) + "\n failed count: " + \
+                str(skipped_count) + "\n failed instances: " + \
                 str(failed_count) + "\n"
             print "Check the deployment logs...\n"
             for logs in describe_deployment['Commands']:
                 print logs['LogUrl']
         elif skipped_count == int(instances):
-            print "Deployment skipped...\n"
+            print "\nDeployment skipped..."
             print "Summary: \n success instances: " + \
                 str(success_count) + "\n skipped instances: " + \
-                str(skipped_count) + "\n failed count: " + \
+                str(skipped_count) + "\n failed instances: " + \
                 str(failed_count) + "\n"
             print "Check the deployment logs...\n"
             for logs in describe_deployment['Commands']:
                 print logs['LogUrl']
         elif failed_count == int(instances):
-            print "Deployment failed...\n"
+            print "\nDeployment failed..."
             print "Summary: \n success instances: " + \
                 str(success_count) + "\n skipped instances: " + \
-                str(skipped_count) + "\n failed count: " + \
+                str(skipped_count) + "\n failed instances: " + \
                 str(failed_count) + "\n"
             print "Check the deployment logs...\n"
             for logs in describe_deployment['Commands']:
                 print logs['LogUrl']
         elif fail_skip_count == int(instances):
-            print "Deployment failed and some of them skipped..."
+            print "\nDeployment failed and some of them skipped..."
             print "Summary: \n success instances: " + \
                 str(success_count) + "\n skipped instances: " + \
-                str(skipped_count) + "\n failed count: " + \
+                str(skipped_count) + "\n failed instances: " + \
                 str(failed_count) + "\n"
             print "Check the deployment logs...\n"
             for logs in describe_deployment['Commands']:
                 print logs['LogUrl']
     except Exception, e:
         print e
+
+
+def get_names(stack, layer, region, name):
+    client = boto3.client('opsworks', region_name=region)
+    stack_details = client.describe_stacks(
+        StackIds=[
+            stack,
+        ]
+    )
+    stack_name = stack_details['Stacks'][0]['Name']
+    layer_details = client.describe_layers(
+        LayerIds=[
+            layer,
+        ]
+    )
+    layer_name = layer_details['Layers'][0]['Name']
+    print "\nrunning " + str(name) + " started for, " + \
+        "\n stack id: " + str(stack) + " | stack name: " + str(stack_name) + \
+        "\n layer id: " + str(layer) + " | layer name: " + str(layer_name) + "\n"
 
 
 def version():

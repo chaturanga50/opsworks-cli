@@ -45,7 +45,8 @@ def execute_recipes():
     except NameError:
         layer = None
     if layer is None:
-        print "running execute_recipe with " + str(cookbook) + "and Custom-Json" + str(custom_json)
+        get_names(stack, layer, region, "execute_recipe")
+        print "\ncookbook " + str(cookbook) + " | and custom-json " + str(custom_json)
         # initiate boto3 client
         client = boto3.client('opsworks', region_name=region)
         # calling deployment to specified stack layer
@@ -63,7 +64,8 @@ def execute_recipes():
             CustomJson=custom_json
         )
     else:
-        print "running execute_recipe with " + str(cookbook)+ "without custom json"
+        get_names(stack, layer, region, "execute_recipe")
+        print "\ncookbook " + str(cookbook) + " without custom json"
         # initiate boto3 client
         client = boto3.client('opsworks', region_name=region)
         # calling deployment to specified stack layer

@@ -33,7 +33,7 @@ def setup():
         else:
             setup_usage()
 
-    print "running setup..."
+    get_names(stack, layer, region, "setup")
     # initiate boto3 client
     client = boto3.client('opsworks', region_name=region)
     # calling deployment to specified stack layer
