@@ -12,7 +12,7 @@ setup(
     author_email='chaturanga50@gmail.com',
     packages=find_packages(),
     include_package_data=True,
-    version='0.4.4',
+    version='0.4.5',
     install_requires=[
         'boto3'
     ],

@@ -34,7 +34,6 @@ def update_custom_cookbooks():
             update_custom_cookbooks_usage()
 
     get_names(stack, layer, region, "update_custom_cookbooks")
-    #print "\nrunning update_custom_cookbooks"
     # initiate boto3 client
     client = boto3.client('opsworks', region_name=region)
     # calling deployment to specified stack layer

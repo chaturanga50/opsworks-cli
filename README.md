@@ -6,8 +6,8 @@ A simple python module to work with aws opsworks
 [![Build Status](https://travis-ci.org/chaturanga50/opsworks-cli.svg?branch=master)](https://travis-ci.org/chaturanga50/opsworks-cli)
 
 How to install
-
 --------------
+
 You can download the updated release version from pypi repo
 
 ``` bash
@@ -58,8 +58,8 @@ opsworks-cli setup --region eu-west-1 \
 
 ### How it works
 
-- sending opsworks commands via aws api to specefic stack ID and layer ID
-- Add the correct instance count as it's checking the success responces according to that.
+- sending opsworks commands via aws api to specific stack ID and layer ID
+- add the correct instance count as it's checking the success responce count according to that.
 
 ## Contributing
 
@@ -67,11 +67,11 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 
 ## Authors
 
-* **Chathuranga Abeyrathna** - *Initial work* - [github](https://github.com/chaturanga50/)
+* ***Chathuranga Abeyrathna*** - *Initial work* - [github](https://github.com/chaturanga50/)
 
 ## Contributors
 
-* **Iruka Rupasinghe** - *Feature Improvements* - [github](https://github.com/Rupasinghe2012/)
+* ***Iruka Rupasinghe*** - *Feature Improvements* - [github](https://github.com/Rupasinghe2012/)
 
 ## License
 

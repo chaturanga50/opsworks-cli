@@ -45,7 +45,10 @@ def get_status(deploymentId, region, instances):
 
     try:
         success_count = 0
-        while success_count == 0:
+        skipped_count = 0
+        failed_count = 0
+        fail_skip_count = 0
+        while success_count is not int(instances):
             print "Deployment not completed yet..waiting 10 seconds before send request back to aws..."
             time.sleep(10)
             describe_deployment = client.describe_commands(
@@ -122,5 +125,5 @@ def get_names(stack, layer, region, name):
 
 
 def version():
-    print '0.4.4'
+    print '0.4.5'
     exit(0)
