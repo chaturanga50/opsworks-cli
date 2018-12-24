@@ -124,5 +124,5 @@ def get_names(stack, layer, region, name):
 
 
 def version():
-    print '0.4.5'
+    print '0.4.6'
     exit(0)

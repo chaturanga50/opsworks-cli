@@ -10,11 +10,24 @@ setup(
     url='https://github.com/chaturanga50/opsworks-cli',
     author='Chathuranga Abeyrathna',
     author_email='chaturanga50@gmail.com',
+    classifiers=[
+        'Development Status :: 5 - Production/Stable',
+        'Intended Audience :: Developers',
+        'Topic :: Software Development :: Build Tools',
+        'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python :: 2.7',
+    ]
+    keywords='opsworks-cli',
     packages=find_packages(),
     include_package_data=True,
-    version='0.4.5',
+    version='0.4.6',
     install_requires=[
-        'boto3'
+        'boto3',
+        'PTable'
     ],
     scripts=['opsworks-cli']
+    project_urls={
+        'Bug Reports': 'https://github.com/chaturanga50/opsworks-cli/issues',
+        'Source': 'https://github.com/chaturanga50/opsworks-cli',
+    },
 )
