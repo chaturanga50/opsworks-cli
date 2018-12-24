@@ -16,7 +16,13 @@ if 'opsworks-cli' in sys.argv[0] and len(sys.argv) > 1:
         modules.update_custom_cookbooks()
     elif sys.argv[1] == "setup":
         modules.setup()
+    elif sys.argv[1] == "--version" or sys.argv[1] == "-v":
+        modules.version()
+    elif sys.argv[1] == "--help" or sys.argv[1] == "-h":
+        modules.usage()
     else:
+        print "input error []"
         modules.usage()
 else:
+    print "input error []"
     modules.usage()
