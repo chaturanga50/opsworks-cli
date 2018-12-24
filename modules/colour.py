@@ -9,7 +9,7 @@ C_START_GREY = '\33[90m'
 C_END = '\33[0m'
 
 """
-    Put all the elements into one single string regardless of the Type of, 
+    Put all the elements into one single string regardless of the Type of,
     individual elements.
 
     :param list_
