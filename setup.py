@@ -17,7 +17,6 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 2.7',
     ]
-    keywords='opsworks-cli',
     packages=find_packages(),
     include_package_data=True,
     version='0.4.6',
