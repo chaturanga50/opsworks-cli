@@ -16,7 +16,7 @@ setup(
         'Topic :: Software Development :: Build Tools',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 2.7',
-    ]
+    ],
     packages=find_packages(),
     include_package_data=True,
     version='0.4.6',
@@ -24,9 +24,9 @@ setup(
         'boto3',
         'PTable'
     ],
-    scripts=['opsworks-cli']
+    scripts=['opsworks-cli'],
     project_urls={
         'Bug Reports': 'https://github.com/chaturanga50/opsworks-cli/issues',
         'Source': 'https://github.com/chaturanga50/opsworks-cli',
-    },
+    }
 )
