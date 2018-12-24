@@ -14,7 +14,7 @@ from common_functions import *
 def execute_recipes():
     try:
         opts, args = getopt.getopt(sys.argv[2:], 'r:s:l:i:c:j:h', [
-            'region=', 'stack=', 'layer=', 'instances=', 'cookbook=', 'custom-json=', 'help'
+            'region=', 'stack=', 'layer=', 'cookbook=', 'custom-json=', 'help'
         ])
     except getopt.GetoptError:
         execute_recipes_usage()
@@ -28,8 +28,6 @@ def execute_recipes():
             stack = arg
         elif opt in ('-l', '--layer'):
             layer = arg
-        elif opt in ('-i', '--instances'):
-            instances = arg
         elif opt in ('-c', '--cookbook'):
             cookbook = arg
         elif opt in ('-j', '--custom-json'):
@@ -84,6 +82,16 @@ def execute_recipes():
             },
             Comment='automated execute_recipes job'
         )
+
+    # calling aws api to get the instances within the layer
+    get_intance_count = client.describe_instances(
+        LayerId=layer
+    )
+    all_instance_IDs = []
+    for instanceid in get_intance_count['Instances']:
+        ec2id = instanceid['Ec2InstanceId']
+        all_instance_IDs.append(ec2id)
+    instances = len(all_instance_IDs)
 
     deploymentId = run_recipes['DeploymentId']
     # sending describe command to get status"""  """

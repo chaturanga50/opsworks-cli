@@ -8,6 +8,8 @@ import sys
 import getopt
 import boto3
 import time
+from prettytable import PrettyTable
+from colour import *
 
 
 def usage():
@@ -21,20 +23,27 @@ def usage():
 
 def execute_recipes_usage():
     print 'usage: \n' + \
-        sys.argv[1] + ' --region [region] --stack [opsworks_stack_id] --layer [opsworks_layer_id] --instances [opsworks_layer_instance_count] --cookbook [cookbook] --custom-json [custom-json]'
+        sys.argv[1] + ' --region [region] --stack [opsworks_stack_id] --layer [opsworks_layer_id] --cookbook [cookbook] --custom-json [custom-json]'
     exit(0)
 
 
 def update_custom_cookbooks_usage():
     print 'usage: \n' + \
-        sys.argv[1] + ' --region [region] --stack [opsworks_stack_id] --layer [opsworks_layer_id] --instances [opsworks_layer_instance_count]\n'
+        sys.argv[1] + ' --region [region] --stack [opsworks_stack_id] --layer [opsworks_layer_id]\n'
     exit(0)
 
 
 def setup_usage():
     print 'usage: \n' + \
-        sys.argv[1] + ' --region [region] --stack [opsworks_stack_id] --layer [opsworks_layer_id] --instances [opsworks_layer_instance_count]'
+        sys.argv[1] + ' --region [region] --stack [opsworks_stack_id] --layer [opsworks_layer_id]'
     exit(0)
+
+
+def summary(success_count, skipped_count, failed_count):
+    table = PrettyTable()
+    table.field_names = ["Success", "Skipped", "Failed"]
+    table.add_row([str(success_count), str(skipped_count), str(failed_count)])
+    print(table.get_string(title="Summary"))
 
 
 def get_status(deploymentId, region, instances):
@@ -48,6 +57,8 @@ def get_status(deploymentId, region, instances):
         skipped_count = 0
         failed_count = 0
         fail_skip_count = 0
+        print "Deployment started..."
+        time.sleep(2)
         while success_count is not int(instances):
             print "Deployment not completed yet..waiting 10 seconds before send request back to aws..."
             time.sleep(10)
@@ -66,39 +77,27 @@ def get_status(deploymentId, region, instances):
             elif int(skipped_count) + int(failed_count) == int(instances):
                 fail_skip_count = int(instances)
         if success_count == int(instances):
-            print "\nDeployment completed..."
-            print "Summary: \n success instances: " + \
-                str(success_count) + "\n skipped instances: " + \
-                str(skipped_count) + "\n failed instances: " + \
-                str(failed_count) + "\n"
-            print "Check the deployment logs...\n"
+            print_success("\nDeployment completed...")
+            summary(success_count, skipped_count, failed_count)
+            print "\nCheck the deployment logs...\n"
             for logs in describe_deployment['Commands']:
                 print logs['LogUrl']
         elif skipped_count == int(instances):
-            print "\nDeployment skipped..."
-            print "Summary: \n success instances: " + \
-                str(success_count) + "\n skipped instances: " + \
-                str(skipped_count) + "\n failed instances: " + \
-                str(failed_count) + "\n"
-            print "Check the deployment logs...\n"
+            print_warning("\nDeployment skipped...")
+            summary(success_count, skipped_count, failed_count)
+            print "\nCheck the deployment logs...\n"
             for logs in describe_deployment['Commands']:
                 print logs['LogUrl']
         elif failed_count == int(instances):
-            print "\nDeployment failed..."
-            print "Summary: \n success instances: " + \
-                str(success_count) + "\n skipped instances: " + \
-                str(skipped_count) + "\n failed instances: " + \
-                str(failed_count) + "\n"
-            print "Check the deployment logs...\n"
+            print_err("\nDeployment failed...")
+            summary(success_count, skipped_count, failed_count)
+            print "\nCheck the deployment logs...\n"
             for logs in describe_deployment['Commands']:
                 print logs['LogUrl']
         elif fail_skip_count == int(instances):
-            print "\nDeployment failed and some of them skipped..."
-            print "Summary: \n success instances: " + \
-                str(success_count) + "\n skipped instances: " + \
-                str(skipped_count) + "\n failed instances: " + \
-                str(failed_count) + "\n"
-            print "Check the deployment logs...\n"
+            print_muted("\nDeployment failed and some of them skipped...")
+            summary(success_count, skipped_count, failed_count)
+            print "\nCheck the deployment logs...\n"
             for logs in describe_deployment['Commands']:
                 print logs['LogUrl']
     except Exception, e:
@@ -119,7 +118,7 @@ def get_names(stack, layer, region, name):
         ]
     )
     layer_name = layer_details['Layers'][0]['Name']
-    print "\nrunning " + str(name) + " started for, " + \
+    print "\nRunning " + str(name) + " for, " + \
         "\n stack id: " + str(stack) + " | stack name: " + str(stack_name) + \
         "\n layer id: " + str(layer) + " | layer name: " + str(layer_name) + "\n"
 

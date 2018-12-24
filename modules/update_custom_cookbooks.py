@@ -14,7 +14,7 @@ from common_functions import *
 def update_custom_cookbooks():
     try:
         opts, args = getopt.getopt(sys.argv[2:], 'r:s:l:i:h', [
-            'region=', 'stack=', 'layer=', 'instances=', 'help'
+            'region=', 'stack=', 'layer=', 'help'
         ])
     except getopt.GetoptError:
         update_custom_cookbooks_usage()
@@ -28,8 +28,6 @@ def update_custom_cookbooks():
             stack = arg
         elif opt in ('-l', '--layer'):
             layer = arg
-        elif opt in ('-i', '--instances'):
-            instances = arg
         else:
             update_custom_cookbooks_usage()
 
@@ -47,6 +45,16 @@ def update_custom_cookbooks():
         },
         Comment='automated update_custom_cookbooks job'
     )
+    
+    # calling aws api to get the instances within the layer
+    get_intance_count = client.describe_instances(
+        LayerId=layer
+    )
+    all_instance_IDs = []
+    for instanceid in get_intance_count['Instances']:
+        ec2id = instanceid['Ec2InstanceId']
+        all_instance_IDs.append(ec2id)
+    instances = len(all_instance_IDs)
 
     deploymentId = run_update_custom_cookbooks['DeploymentId']
     # sending describe command to get status"""  """
