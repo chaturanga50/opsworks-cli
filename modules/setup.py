@@ -8,7 +8,9 @@ import sys
 import getopt
 import boto3
 import time
-from common_functions import *
+from common_functions import setup_usage
+from common_functions import get_names
+from common_functions import get_status
 
 
 def setup():

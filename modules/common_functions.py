@@ -9,7 +9,10 @@ import getopt
 import boto3
 import time
 from prettytable import PrettyTable
-from colour import *
+from colour import print_success
+from colour import print_warning
+from colour import print_err
+from colour import print_muted
 
 
 def usage():
