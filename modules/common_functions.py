@@ -115,17 +115,20 @@ def get_names(stack, layer, region, name):
         ]
     )
     stack_name = stack_details['Stacks'][0]['Name']
-    layer_details = client.describe_layers(
-        LayerIds=[
-            layer,
-        ]
-    )
-    layer_name = layer_details['Layers'][0]['Name']
+    if layer is not None:
+        layer_details = client.describe_layers(
+            LayerIds=[
+                layer,
+            ]
+        )
+        layer_name = layer_details['Layers'][0]['Name']
+    else:
+        layer_name ="None"
     print "\nRunning " + str(name) + " for, " + \
         "\n stack id: " + str(stack) + " | stack name: " + str(stack_name) + \
         "\n layer id: " + str(layer) + " | layer name: " + str(layer_name) + "\n"
 
 
 def version():
-    print '0.4.6'
+    print '0.4.7'
     exit(0)
