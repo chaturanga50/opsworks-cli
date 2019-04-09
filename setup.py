@@ -24,7 +24,7 @@ setup(
         'boto3',
         'PTable'
     ],
-    scripts=['bin/opsworks-cli'],
+    scripts=['opsworks-cli'],
     project_urls={
         'Bug Reports': 'https://github.com/chaturanga50/opsworks-cli/issues',
         'Source': 'https://github.com/chaturanga50/opsworks-cli',
