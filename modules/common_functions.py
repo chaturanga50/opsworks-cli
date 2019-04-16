@@ -62,7 +62,7 @@ def get_status(deploymentId, region, instances):
         fail_skip_count = 0
         print "Deployment started..."
         time.sleep(2)
-        while success_count is not int(instances):
+        while not (success_count == int(instances) or failed_count == int(instances)):
             print "Deployment not completed yet..waiting 10 seconds before send request back to aws..."
             time.sleep(10)
             describe_deployment = client.describe_commands(
@@ -79,6 +79,8 @@ def get_status(deploymentId, region, instances):
                 failed_count = int(instances)
             elif int(skipped_count) + int(failed_count) == int(instances):
                 fail_skip_count = int(instances)
+            elif int(success_count) + int(failed_count) == int(instances):
+                success_fail_count = int(instances)
         if success_count == int(instances):
             print_success("\nDeployment completed...")
             summary(success_count, skipped_count, failed_count)
@@ -103,6 +105,13 @@ def get_status(deploymentId, region, instances):
             print "\nCheck the deployment logs...\n"
             for logs in describe_deployment['Commands']:
                 print logs['LogUrl']
+        elif success_fail_count == int(instances):
+            print_warning(
+                "\nDeployment success on some instances and some are got failed...")
+            summary(success_count, skipped_count, failed_count)
+            print "\nCheck the deployment logs...\n"
+            for logs in describe_deployment['Commands']:
+                print logs['LogUrl']
     except Exception, e:
         print e
 
@@ -123,12 +132,13 @@ def get_names(stack, layer, region, name):
         )
         layer_name = layer_details['Layers'][0]['Name']
     else:
-        layer_name ="None"
+        layer_name = "None"
     print "\nRunning " + str(name) + " for, " + \
         "\n stack id: " + str(stack) + " | stack name: " + str(stack_name) + \
-        "\n layer id: " + str(layer) + " | layer name: " + str(layer_name) + "\n"
+        "\n layer id: " + str(layer) + " | layer name: " + \
+        str(layer_name) + "\n"
 
 
 def version():
-    print '0.4.7'
+    print '0.4.8'
     exit(0)
