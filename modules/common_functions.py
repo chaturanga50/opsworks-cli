@@ -29,10 +29,12 @@ def execute_recipes_usage():
         sys.argv[1] + ' --region [region] --stack [opsworks_stack_id] --layer [opsworks_layer_id] --cookbook [cookbook] --custom-json [custom-json]'
     exit(0)
 
+
 def deploy_usage():
     print 'usage: \n' + \
         sys.argv[1] + ' --region [region] --stack [opsworks_stack_id] --layer [opsworks_layer_id] '
     exit(0)
+
 
 def update_custom_cookbooks_usage():
     print 'usage: \n' + \
