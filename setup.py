@@ -19,7 +19,7 @@ setup(
     ],
     packages=find_packages(),
     include_package_data=True,
-    version='0.4.8',
+    version='0.4.9',
     install_requires=[
         'boto3',
         'PTable'
