@@ -3,7 +3,7 @@ opsworks-cli
 
 A simple python module to work with aws opsworks
 
-[![Build Status](https://travis-ci.org/chaturanga50/opsworks-cli.svg?branch=master)](https://travis-ci.org/chaturanga50/opsworks-cli)
+[![Build Status](https://travis-ci.org/chaturanga50/opsworks-cli.svg?branch=master)](https://travis-ci.org/chaturanga50/opsworks-cli) [![Maintainability](https://api.codeclimate.com/v1/badges/629a847bb74c75086cff/maintainability)](https://codeclimate.com/github/chaturanga50/opsworks-cli/maintainability) <a href="https://codeclimate.com/github/chaturanga50/opsworks-cli/test_coverage"><img src="https://api.codeclimate.com/v1/badges/629a847bb74c75086cff/test_coverage" /></a>
 
 How to install
 --------------
@@ -70,10 +70,23 @@ opsworks-cli setup --region eu-west-1 \
              --layer ac0df176-104b-46ae-946e-7cf7367b816e
 ```
 
+#### run deploy
+```
+* region - OpsWorks stack region (required)
+* stack - OpsWorks stack ID (required)
+* layer - OpsWorks layer ID (required)
+```
+
+```bash
+opsworks-cli deploy --region eu-west-1 \
+             --stack 2e7f6dd5-e4a3-4389-bc95-b4bacc234df0 \
+             --layer ac0df176-104b-46ae-946e-7cf7367b816e
+```
+
 ### How it works
 
-- sending opsworks commands via aws api to specific stack ID and layer ID
-- according to the responces from servers script will show the final output.
+- sending opsworks api requests through python boto3 to specific stack ID and layer ID.
+- as per the result output from the aws api endpoints we will print out the final output.
 
 ## Contributing
 
