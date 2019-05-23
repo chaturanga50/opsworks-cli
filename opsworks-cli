@@ -31,8 +31,6 @@ if 'opsworks-cli' in sys.argv[0] and len(sys.argv) > 1:
     else:
         modules.colour.print_err("input error []")
         modules.usage()
-        print(args)
 else:
     modules.colour.print_err("input error []")
     modules.usage()
-    print(args)
