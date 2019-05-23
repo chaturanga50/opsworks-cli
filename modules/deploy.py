@@ -8,9 +8,7 @@ import sys
 import getopt
 import boto3
 import time
-from common_functions import deploy_usage
-from common_functions import get_names
-from common_functions import get_status
+import modules.common_functions
 
 
 def deploy():
@@ -19,11 +17,11 @@ def deploy():
             'region=', 'stack=', 'layer=', 'help'
         ])
     except getopt.GetoptError:
-        deploy_usage()
+        modules.common_functions.deploy_usage()
         sys.exit(2)
     for opt, arg in opts:
         if opt in ('-h', '--help'):
-            deploy_usage()
+            modules.common_functions.deploy_usage()
         elif opt in ('-r', '--region'):
             region = arg
         elif opt in ('-s', '--stack'):
@@ -31,7 +29,7 @@ def deploy():
         elif opt in ('-l', '--layer'):
             layer = arg
         else:
-            deploy_usage()
+            modules.common_functions.deploy_usage()
     try:
         custom_json
     except NameError:
@@ -40,7 +38,7 @@ def deploy():
         layer
     except NameError:
         layer = None
-        get_names(stack, layer, region, "deploy")
+        modules.common_functions.get_names(stack, layer, region, "deploy")
         # initiate boto3 client
         client = boto3.client('opsworks', region_name=region)
         # calling deployment to specified stack layer
@@ -67,4 +65,4 @@ def deploy():
 
     deploymentId = run_recipes['DeploymentId']
     # sending describe command to get status"""  """
-    get_status(deploymentId, region, instances)
+    modules.common_functions.get_status(deploymentId, region, instances)

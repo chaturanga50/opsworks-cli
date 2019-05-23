@@ -8,9 +8,7 @@ import sys
 import getopt
 import boto3
 import time
-from common_functions import update_custom_cookbooks_usage
-from common_functions import get_names
-from common_functions import get_status
+import modules.common_functions
 
 
 def update_custom_cookbooks():
@@ -19,11 +17,11 @@ def update_custom_cookbooks():
             'region=', 'stack=', 'layer=', 'help'
         ])
     except getopt.GetoptError:
-        update_custom_cookbooks_usage()
+        modules.common_functions.update_custom_cookbooks_usage()
         sys.exit(2)
     for opt, arg in opts:
         if opt in ('-h', '--help'):
-            update_custom_cookbooks_usage()
+            modules.common_functions.update_custom_cookbooks_usage()
         elif opt in ('-r', '--region'):
             region = arg
         elif opt in ('-s', '--stack'):
@@ -31,9 +29,9 @@ def update_custom_cookbooks():
         elif opt in ('-l', '--layer'):
             layer = arg
         else:
-            update_custom_cookbooks_usage()
+            modules.common_functions.update_custom_cookbooks_usage()
 
-    get_names(stack, layer, region, "update_custom_cookbooks")
+    modules.common_functions.get_names(stack, layer, region, "update_custom_cookbooks")
     # initiate boto3 client
     client = boto3.client('opsworks', region_name=region)
     # calling deployment to specified stack layer
@@ -60,4 +58,4 @@ def update_custom_cookbooks():
 
     deploymentId = run_update_custom_cookbooks['DeploymentId']
     # sending describe command to get status"""  """
-    get_status(deploymentId, region, instances)
+    modules.common_functions.get_status(deploymentId, region, instances)

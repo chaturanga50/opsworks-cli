@@ -4,8 +4,7 @@
 
 import sys
 import getopt
-from common_functions import usage
-from common_functions import version
+import modules.common_functions
 
 
 def common_help():
@@ -13,16 +12,16 @@ def common_help():
         opts, args = getopt.getopt(sys.argv[1:], 'h:v', [
             'help', 'version'])
     except getopt.GetoptError:
-        usage()
+        modules.common_functions.usage()
         sys.exit(2)
 
     for opt, arg in opts:
         if opt in ('-h', '--help'):
-            usage()
+            modules.common_functions.usage()
             sys.exit(0)
         elif opt in ('-v', '--version'):
-            version()
+            modules.common_functions.version()
             sys.exit(0)
         else:
-            usage()
+            modules.common_functions.usage()
             sys.exit(0)

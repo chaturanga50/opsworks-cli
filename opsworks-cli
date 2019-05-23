@@ -6,7 +6,13 @@ import sys
 import getopt
 import boto3
 import time
-import modules
+import modules.execute_recipes
+import modules.update_custom_cookbooks
+import modules.deploy
+import modules.setup
+import modules.common_functions
+import modules.colour
+
 
 #if sys.argv[0] == "opsworks-cli" and len(sys.argv) > 1:
 if 'opsworks-cli' in sys.argv[0] and len(sys.argv) > 1:
@@ -19,12 +25,12 @@ if 'opsworks-cli' in sys.argv[0] and len(sys.argv) > 1:
     elif sys.argv[1] == "setup":
         modules.setup()
     elif sys.argv[1] == "--version" or sys.argv[1] == "-v":
-        modules.version()
+        modules.common_functions.version()
     elif sys.argv[1] == "--help" or sys.argv[1] == "-h":
-        modules.usage()
+        modules.common_functions.usage()
     else:
-        print "input error []"
+        modules.colour.print_err("input error []")
         modules.usage()
 else:
-    print "input error []"
+    modules.colour.print_err("input error []")
     modules.usage()
