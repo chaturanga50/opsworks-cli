@@ -14,33 +14,33 @@ import modules.colour
 
 def usage():
     print('usage: opsworks-cli [options] <command> <subcommand> [<subcommand> ...] [parameters]\n')
-    print('To see help text, you can run: \n' + \
-          sys.argv[0] + ' --help \n' + \
-          sys.argv[0] + ' [options] --help \n')
+    print('To see help text, you can run: \n'
+          + sys.argv[0] + ' --help \n'
+          + sys.argv[0] + ' [options] --help \n')
     print('available options:\n - execute-recipes\n - update-custom-cookbooks\n - setup\n - deploy\n')
 
 
 def execute_recipes_usage():
-    print('usage: execute-recipes: \n' + \
-        sys.argv[1] + ' --region [region] --stack [opsworks_stack_id] --layer [opsworks_layer_id] --cookbook [cookbook] --custom-json [custom-json]\n')
+    print('usage: execute-recipes: \n'
+          + sys.argv[1] + ' --region [region] --stack [opsworks_stack_id] --layer [opsworks_layer_id] --cookbook [cookbook] --custom-json [custom-json]\n')
     exit(0)
 
 
 def deploy_usage():
-    print('usage: deploy: \n' + \
-        sys.argv[1] + ' --region [region] --stack [opsworks_stack_id] --layer [opsworks_layer_id]\n')
+    print('usage: deploy: \n'
+          + sys.argv[1] + ' --region [region] --stack [opsworks_stack_id] --layer [opsworks_layer_id]\n')
     exit(0)
 
 
 def update_custom_cookbooks_usage():
-    print('usage: update-custom-cookbooks: \n' + \
-        sys.argv[1] + ' --region [region] --stack [opsworks_stack_id] --layer [opsworks_layer_id]\n')
+    print('usage: update-custom-cookbooks: \n'
+          + sys.argv[1] + ' --region [region] --stack [opsworks_stack_id] --layer [opsworks_layer_id]\n')
     exit(0)
 
 
 def setup_usage():
-    print('usage: setup: \n' + \
-        sys.argv[1] + ' --region [region] --stack [opsworks_stack_id] --layer [opsworks_layer_id]\n')
+    print('usage: setup: \n'
+          + sys.argv[1] + ' --region [region] --stack [opsworks_stack_id] --layer [opsworks_layer_id]\n')
     exit(0)
 
 
@@ -135,10 +135,10 @@ def get_names(stack, layer, region, name):
         layer_name = layer_details['Layers'][0]['Name']
     else:
         layer_name = "None"
-    print("\nRunning " + str(name) + " for, " + \
-        "\n stack id: " + str(stack) + " | stack name: " + str(stack_name) + \
-        "\n layer id: " + str(layer) + " | layer name: " + \
-        str(layer_name) + "\n")
+    print("\nRunning " + str(name) + " for, "
+          + "\n stack id: " + str(stack) + " | stack name: " + str(stack_name)
+          + "\n layer id: " + str(layer) + " | layer name: "
+          + str(layer_name) + "\n")
 
 
 def version():
