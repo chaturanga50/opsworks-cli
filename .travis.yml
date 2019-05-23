@@ -16,7 +16,8 @@ env:
   - BOTO_CONFIG=/tmp/nowhere
 addons:
   sonarcloud:
-    organization: "chaturanga50-github" # the key of the org you chose at step #3
+    organization: "chaturanga50-github"
+    projectKey: "chaturanga50_opsworks-cli"
     token:
       secure: "C8UThaKu6xexITZQe6BG95AjauJ+wzQcloBlY2rFaI90NIztoHAzKpdyn39W+rR5p+Rp2bRH2K1cwCZ6OPRAeHMxtgA1bTZAWsmpPUiGHT55QVL5MHz0yYWDiK7T+MePR9fMgnIT9u2+oy4GjztBZcz1RD7HOQiw5txUMqu2rHWlbhvcL4nvzF5ZhCnoTr3pNPGPo5/EmmaHhHyxiIyI5KVF5w3HJwqsCHqB+rLygEIPeXH6GrN3KALheTFill9XnWN0DHH8SdVJCGDdSUqg08Yfdkamc79c9Atz1ainQkRowToXTSzSK9ipFZpar+Z7M86sFDHxoQJ76A1zCRZ0Nkvd8Ut55JoBxiyzGMCqIvc6Qk25V9Crg9v0WYvlwnML+pPYru+PSickpcs3rHuLp0Nv5nbyHcpzDyTKoYxavqzQpYgPcyWuV7tr2n+p7jE7WdKGReuhUOEeXWxNfqEBV+Sga7YLTU6/38+WjU7yXLx+lG+5cjZQND7udig1TSJOnC4wgtopGEIQvKstfrmFJBlxL26gqkr6iF8N5SA4K757JXoix7oM7oXsA58xnGNQoEdk7Y6fjkCHqnGEadnEZzMxo1aI8W0hC+l0T6nZgwwxM0uiIZJKF8mSuQ9VzDJkAaP7Zcu9PRiCXE/lTX+qlU4btHarrdVFN2sTw71x5zQ="
 script:
