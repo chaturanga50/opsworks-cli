@@ -1,4 +1,4 @@
-![opsworks-cli](opsworks-cli.png)
+![opsworks-cli](src/opsworks-cli.png)
 opsworks-cli
 ======================
 
