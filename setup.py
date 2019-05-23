@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 from codecs import open
 from os import path
 from io import open
-import modules
+import modules.common_functions
 
 setup(
     name='opsworks-cli',
@@ -15,14 +15,14 @@ setup(
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Build Tools',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python',
     ],
     packages=find_packages(),
     include_package_data=True,
-    version='0.4.9',
+    version="0.4.9",
     install_requires=[
         'boto3',
-        'PTable'
+        'prettytable'
     ],
     scripts=['opsworks-cli'],
     project_urls={

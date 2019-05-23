@@ -8,9 +8,7 @@ import sys
 import getopt
 import boto3
 import time
-from common_functions import setup_usage
-from common_functions import get_names
-from common_functions import get_status
+import modules.common_functions
 
 
 def setup():
@@ -19,11 +17,11 @@ def setup():
             'region=', 'stack=', 'layer=', 'help'
         ])
     except getopt.GetoptError:
-        setup_usage()
+        modules.common_functions.setup_usage()
         sys.exit(2)
     for opt, arg in opts:
         if opt in ('-h', '--help'):
-            setup_usage()
+            modules.common_functions.setup_usage()
         elif opt in ('-r', '--region'):
             region = arg
         elif opt in ('-s', '--stack'):
@@ -31,9 +29,9 @@ def setup():
         elif opt in ('-l', '--layer'):
             layer = arg
         else:
-            setup_usage()
+            modules.common_functions.setup_usage()
 
-    get_names(stack, layer, region, "setup")
+    modules.common_functions.get_names(stack, layer, region, "setup")
     # initiate boto3 client
     client = boto3.client('opsworks', region_name=region)
     # calling deployment to specified stack layer
@@ -60,4 +58,4 @@ def setup():
 
     deploymentId = run_setup['DeploymentId']
     # sending describe command to get status"""  """
-    get_status(deploymentId, region, instances)
+    modules.common_functions.get_status(deploymentId, region, instances)

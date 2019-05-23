@@ -8,9 +8,7 @@ import sys
 import getopt
 import boto3
 import time
-from common_functions import execute_recipes_usage
-from common_functions import get_names
-from common_functions import get_status
+import modules.common_functions
 
 
 def execute_recipes():
@@ -19,11 +17,11 @@ def execute_recipes():
             'region=', 'stack=', 'layer=', 'cookbook=', 'custom-json=', 'help'
         ])
     except getopt.GetoptError:
-        execute_recipes_usage()
+        modules.common_functions.execute_recipes_usage()
         sys.exit(2)
     for opt, arg in opts:
         if opt in ('-h', '--help'):
-            execute_recipes_usage()
+            modules.common_functions.execute_recipes_usage()
         elif opt in ('-r', '--region'):
             region = arg
         elif opt in ('-s', '--stack'):
@@ -35,7 +33,7 @@ def execute_recipes():
         elif opt in ('-j', '--custom-json'):
             custom_json = arg
         else:
-            execute_recipes_usage()
+            modules.common_functions.execute_recipes_usage()
     try:
         custom_json
     except NameError:
@@ -45,8 +43,8 @@ def execute_recipes():
     except NameError:
         layer = None
     if layer is None:
-        get_names(stack, layer, region, "execute_recipe")
-        print "\ncookbook " + str(cookbook) + " | and custom-json " + str(custom_json)
+        modules.common_functions.get_names(stack, layer, region, "execute_recipe")
+        print("\ncookbook " + str(cookbook) + " | and custom-json " + str(custom_json))
         # initiate boto3 client
         client = boto3.client('opsworks', region_name=region)
         # calling deployment to specified stack layer
@@ -73,8 +71,8 @@ def execute_recipes():
             all_instance_IDs.append(ec2id)
         instances = len(all_instance_IDs)
     else:
-        get_names(stack, layer, region, "execute_recipe")
-        print "\ncookbook " + str(cookbook) + " without custom json"
+        modules.common_functions.get_names(stack, layer, region, "execute_recipe")
+        print("\ncookbook " + str(cookbook) + " without custom json")
         # initiate boto3 client
         client = boto3.client('opsworks', region_name=region)
         # calling deployment to specified stack layer
@@ -106,4 +104,4 @@ def execute_recipes():
 
     deploymentId = run_recipes['DeploymentId']
     # sending describe command to get status"""  """
-    get_status(deploymentId, region, instances)
+    modules.common_functions.get_status(deploymentId, region, instances)

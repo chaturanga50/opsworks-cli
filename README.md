@@ -1,14 +1,14 @@
 opsworks-cli
 ======================
 
-A simple python module to work with aws opsworks
+A simple python module to work with aws opsworks.
 
 [![Build Status](https://travis-ci.org/chaturanga50/opsworks-cli.svg?branch=master)](https://travis-ci.org/chaturanga50/opsworks-cli) [![Maintainability](https://api.codeclimate.com/v1/badges/629a847bb74c75086cff/maintainability)](https://codeclimate.com/github/chaturanga50/opsworks-cli/maintainability) <a href="https://codeclimate.com/github/chaturanga50/opsworks-cli/test_coverage"><img src="https://api.codeclimate.com/v1/badges/629a847bb74c75086cff/test_coverage" /></a>
 
 How to install
 --------------
 
-You can download the updated release version from pypi repo
+You can download the updated release version from pypi repo using `pip` or directly from our github [releases](https://github.com/chaturanga50/opsworks-cli/releases) and `unzip` the content.
 
 ``` bash
 pip install opsworks-cli
@@ -19,7 +19,13 @@ Usage
 
 You can see the list of parameters available via `opsworks-cli --help`
 
-#### run update_custom_cookbook
+Options:
+- [Update custom cookbook](#update-custom-cookbook) - Update all the cookbook cache in the instances in the layer.
+- [Execute recipes](#execute-recipes) - Execute specific cookbook against layer.
+- [Setup](#setup) - Running setup against layer.
+- [Deploy](#deploy) - Deploy application to the layer.
+
+#### update-custom-cookbook
 
 ```
 * region - OpsWorks stack region (required)
@@ -33,7 +39,7 @@ opsworks-cli update-custom-cookbooks --region eu-west-1 \
              --layer ac0df176-104b-46ae-946e-7cf7367b816e
 ```
 
-#### run execute-recipes
+#### execute-recipes
 ```
 * region - OpsWorks stack region (required)
 * stack - OpsWorks stack ID (required)
@@ -57,7 +63,7 @@ opsworks-cli execute-recipes --region eu-west-1 \
              --cookbook apache
 ```
 
-#### run setup
+#### setup
 ```
 * region - OpsWorks stack region (required)
 * stack - OpsWorks stack ID (required)
@@ -70,7 +76,7 @@ opsworks-cli setup --region eu-west-1 \
              --layer ac0df176-104b-46ae-946e-7cf7367b816e
 ```
 
-#### run deploy
+#### deploy
 ```
 * region - OpsWorks stack region (required)
 * stack - OpsWorks stack ID (required)
@@ -85,8 +91,8 @@ opsworks-cli deploy --region eu-west-1 \
 
 ### How it works
 
-- sending opsworks api requests through python boto3 to specific stack ID and layer ID.
-- as per the result output from the aws api endpoints we will print out the final output.
+- sending opsworks commands via aws api to specific stack ID and layer ID.
+- according to the responces from servers `opsworks-cli` will show the final output.
 
 ## Contributing
 
