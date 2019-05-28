@@ -15,7 +15,7 @@ import modules.common_functions
 
 
 class Case(unittest.TestCase):
-    if sys.version_info[0] > '3.4.1':
+    if sys.version_info[0] > 3.4:
         def test_execute_recipes(self):
             usage_stdout = StringIO()
             with contextlib.redirect_stdout(usage_stdout):
