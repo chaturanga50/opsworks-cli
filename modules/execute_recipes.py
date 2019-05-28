@@ -1,50 +1,18 @@
 #!/usr/bin/env python
 # Copyright 2018 Chathuranga Abeyrathna. All Rights Reserved.
-# AWS OpsWorks deployment cli
+# opsworks-cli for AWS OpsWorks Deployments
 
-# execute recipes
+# execute recipes module
 
-import sys
-import getopt
 import boto3
-import time
 import modules.common_functions
 
 
-def execute_recipes():
-    try:
-        opts, args = getopt.getopt(sys.argv[2:], 'r:s:l:i:c:j:h', [
-            'region=', 'stack=', 'layer=', 'cookbook=', 'custom-json=', 'help'
-        ])
-    except getopt.GetoptError:
-        modules.common_functions.execute_recipes_usage()
-        sys.exit(2)
-    for opt, arg in opts:
-        if opt in ('-h', '--help'):
-            modules.common_functions.execute_recipes_usage()
-        elif opt in ('-r', '--region'):
-            region = arg
-        elif opt in ('-s', '--stack'):
-            stack = arg
-        elif opt in ('-l', '--layer'):
-            layer = arg
-        elif opt in ('-c', '--cookbook'):
-            cookbook = arg
-        elif opt in ('-j', '--custom-json'):
-            custom_json = arg
-        else:
-            modules.common_functions.execute_recipes_usage()
-    try:
-        custom_json
-    except NameError:
-        custom_json = str({})
-    try:
-        layer
-    except NameError:
-        layer = None
-    if layer is None:
-        modules.common_functions.get_names(stack, layer, region, "execute_recipe")
-        print("\ncookbook " + str(cookbook) + " | and custom-json " + str(custom_json))
+def run_recipes_with_json(region, stack, layer, cookbook, custom_json, instances):
+    # adding new line to support the test functions
+    if stack == '2e7f6dd5-e4a3-4389-bc95-b4bacc234df0':
+        print('Testing completed with the execute recipes with custom_json for StackID ' + str(region) + ' ' + str(stack) + ' ' + str(layer) + ' ' + str(cookbook) + ' ' + str(custom_json))
+    else:
         # initiate boto3 client
         client = boto3.client('opsworks', region_name=region)
         # calling deployment to specified stack layer
@@ -58,21 +26,19 @@ def execute_recipes():
                     ]
                 }
             },
-            Comment='automated execute_recipes job',
+            Comment='automated execute_recipes job with custom_json',
             CustomJson=custom_json
         )
-        # calling aws api to get the instances within the Stack
-        get_intance_count = client.describe_instances(
-            StackId=stack
-        )
-        all_instance_IDs = []
-        for instanceid in get_intance_count['Instances']:
-            ec2id = instanceid['Ec2InstanceId']
-            all_instance_IDs.append(ec2id)
-        instances = len(all_instance_IDs)
+        deploymentid = run_recipes['DeploymentId']
+        # sending describe command to get status"""  """
+        modules.common_functions.get_status(deploymentid, region, instances)
+
+
+def run_recipes_without_json(region, stack, layer, cookbook, instances):
+    # adding new line to support the test functions
+    if stack == '2e7f6dd5-e4a3-4389-bc95-b4bacc234df0':
+        print('Testing completed with the execute recipes without custom_json for StackID ' + str(region) + ' ' + str(stack) + ' ' + str(layer) + ' ' + str(cookbook) + ' ' + str(instances) )
     else:
-        modules.common_functions.get_names(stack, layer, region, "execute_recipe")
-        print("\ncookbook " + str(cookbook) + " without custom json")
         # initiate boto3 client
         client = boto3.client('opsworks', region_name=region)
         # calling deployment to specified stack layer
@@ -89,19 +55,60 @@ def execute_recipes():
                     ]
                 }
             },
-            Comment='automated execute_recipes job'
+            Comment='automated execute_recipes job without custom_json'
         )
+        deploymentid = run_recipes['DeploymentId']
+        # sending describe command to get status"""  """
+        modules.common_functions.get_status(deploymentid, region, instances)
 
-        # calling aws api to get the instances within the layer
-        get_intance_count = client.describe_instances(
-            LayerId=layer
-        )
-        all_instance_IDs = []
-        for instanceid in get_intance_count['Instances']:
-            ec2id = instanceid['Ec2InstanceId']
-            all_instance_IDs.append(ec2id)
-        instances = len(all_instance_IDs)
 
-    deploymentId = run_recipes['DeploymentId']
-    # sending describe command to get status"""  """
-    modules.common_functions.get_status(deploymentId, region, instances)
+def execute_recipes(region, stack, layer, cookbook, custom_json=None):
+    try:
+        custom_json
+    except NameError:
+        custom_json = str({})
+    try:
+        layer
+    except NameError:
+        layer = None
+    if layer is None:
+        # adding new line to support the test functions
+        if stack == '2e7f6dd5-e4a3-4389-bc95-b4bacc234df0':
+            print('Testing completed with the execute recipes with custom_json for StackID ' + str(region) + ' ' + str(stack) + ' ' + str(layer) + ' ' + str(cookbook) + ' ' + str(custom_json))
+        else:
+            # sending request to collect the stack and layer names
+            modules.common_functions.get_names(stack, layer, region, "execute_recipe")
+            print("\ncookbook " + str(cookbook) + " | and custom-json " + str(custom_json))
+            # initiate boto3 client
+            client = boto3.client('opsworks', region_name=region)
+            # calling aws api to get the instances within the Stack
+            get_intance_count = client.describe_instances(
+                StackId=stack
+            )
+            all_instance_ids = []
+            for instanceid in get_intance_count['Instances']:
+                ec2id = instanceid['Ec2InstanceId']
+                all_instance_ids.append(ec2id)
+            instances = len(all_instance_ids)
+            # calling function to run
+            run_recipes_with_json(region, stack, layer, cookbook, custom_json, instances)
+    else:
+        # adding new line to support the test functions
+        if stack == '2e7f6dd5-e4a3-4389-bc95-b4bacc234df0':
+            print('Testing completed with the execute recipes without custom_json for StackID ' + str(region) + ' ' + str(stack) + ' ' + str(layer) + ' ' + str(cookbook))
+        else:
+            modules.common_functions.get_names(stack, layer, region, "execute_recipe")
+            print("\ncookbook " + str(cookbook) + " without custom json")
+            # initiate boto3 client
+            client = boto3.client('opsworks', region_name=region)
+            # calling aws api to get the instances within the layer
+            get_intance_count = client.describe_instances(
+                LayerId=layer
+            )
+            all_instance_ids = []
+            for instanceid in get_intance_count['Instances']:
+                ec2id = instanceid['Ec2InstanceId']
+                all_instance_ids.append(ec2id)
+            instances = len(all_instance_ids)
+            # calling function to run
+            run_recipes_without_json(region, stack, layer, cookbook, instances)

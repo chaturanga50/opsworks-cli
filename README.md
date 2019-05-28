@@ -5,7 +5,7 @@ opsworks-cli
 
 A simple python module to work with aws opsworks.
 
-[![Build Status](https://travis-ci.org/chaturanga50/opsworks-cli.svg?branch=master)](https://travis-ci.org/chaturanga50/opsworks-cli) [![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=chaturanga50_opsworks-cli&metric=alert_status)](https://sonarcloud.io/dashboard?id=chaturanga50_opsworks-cli) 
+[![Build Status](https://travis-ci.org/chaturanga50/opsworks-cli.svg?branch=master)](https://travis-ci.org/chaturanga50/opsworks-cli) [![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=chaturanga50_opsworks-cli&metric=alert_status)](https://sonarcloud.io/dashboard?id=chaturanga50_opsworks-cli)
 [![SonarCloud Coverage](https://sonarcloud.io/api/project_badges/measure?project=chaturanga50_opsworks-cli&metric=coverage)](https://sonarcloud.io/component_measures/metric/coverage/list?id=chaturanga50_opsworks-cli)
 [![SonarCloud Bugs](https://sonarcloud.io/api/project_badges/measure?project=chaturanga50_opsworks-cli&metric=bugs)](https://sonarcloud.io/component_measures/metric/reliability_rating/list?id=chaturanga50_opsworks-cli)
 [![SonarCloud Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=chaturanga50_opsworks-cli&metric=vulnerabilities)](https://sonarcloud.io/component_measures/metric/security_rating/list?id=chaturanga50_opsworks-cli)
@@ -25,14 +25,16 @@ Usage
 You can see the list of parameters available via `opsworks-cli --help`
 
 Options:
+
 - [Update custom cookbook](#update-custom-cookbook) - Update all the cookbook cache in the instances in the layer.
 - [Execute recipes](#execute-recipes) - Execute specific cookbook against layer.
 - [Setup](#setup) - Running setup against layer.
 - [Deploy](#deploy) - Deploy application to the layer.
 
-#### update-custom-cookbook
+update-custom-cookbook
+----------------------
 
-```
+```bash
 * region - OpsWorks stack region (required)
 * stack - OpsWorks stack ID (required)
 * layer - OpsWorks layer ID (required)
@@ -44,8 +46,10 @@ opsworks-cli update-custom-cookbooks --region eu-west-1 \
              --layer ac0df176-104b-46ae-946e-7cf7367b816e
 ```
 
-#### execute-recipes
-```
+execute-recipes
+---------------
+
+```bash
 * region - OpsWorks stack region (required)
 * stack - OpsWorks stack ID (required)
 * layer - OpsWorks layer ID (required)
@@ -68,8 +72,10 @@ opsworks-cli execute-recipes --region eu-west-1 \
              --cookbook apache
 ```
 
-#### setup
-```
+setup
+-----
+
+```bash
 * region - OpsWorks stack region (required)
 * stack - OpsWorks stack ID (required)
 * layer - OpsWorks layer ID (required)
@@ -81,8 +87,10 @@ opsworks-cli setup --region eu-west-1 \
              --layer ac0df176-104b-46ae-946e-7cf7367b816e
 ```
 
-#### deploy
-```
+deploy
+------
+
+```bash
 * region - OpsWorks stack region (required)
 * stack - OpsWorks stack ID (required)
 * layer - OpsWorks layer ID (required)
@@ -94,23 +102,28 @@ opsworks-cli deploy --region eu-west-1 \
              --layer ac0df176-104b-46ae-946e-7cf7367b816e
 ```
 
-### How it works
+How it works
+------------
 
 - sending opsworks commands via aws api to specific stack ID and layer ID.
 - according to the responces from servers `opsworks-cli` will show the final output.
 
-## Contributing
+Contributing
+------------
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
-## Authors
+Authors
+-------
 
-* ***Chathuranga Abeyrathna*** - *Initial work* - [github](https://github.com/chaturanga50/)
+- *Chathuranga Abeyrathna* - [github](https://github.com/chaturanga50/)
 
-## Contributors
+Contributors
+------------
 
-* ***Iruka Rupasinghe*** - *Feature Improvements* - [github](https://github.com/Rupasinghe2012/)
+- *Iruka Rupasinghe* - [github](https://github.com/Rupasinghe2012/)
 
-## License
+License
+-------
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+opsworks-cli is licensed under the [Apache 2.0 License](LICENSE)

@@ -1,36 +1,57 @@
 #!/usr/bin/env python
 # Copyright 2018 Chathuranga Abeyrathna. All Rights Reserved.
-# AWS OpsWorks deployment cli
+# opsworks-cli for AWS OpsWorks Deployments
 
 import sys
-import getopt
-import boto3
-import time
+import argparse
 import modules.execute_recipes
 import modules.update_custom_cookbooks
 import modules.deploy
 import modules.setup
-import modules.common_functions
-import modules.colour
 
 
-#if sys.argv[0] == "opsworks-cli" and len(sys.argv) > 1:
-if 'opsworks-cli' in sys.argv[0] and len(sys.argv) > 1:
-    if sys.argv[1] == "execute-recipes":
-        modules.execute_recipes()    
-    elif sys.argv[1] == "update-custom-cookbooks":
-        modules.update_custom_cookbooks()
-    elif sys.argv[1] == "deploy":
-        modules.deploy()
-    elif sys.argv[1] == "setup":
-        modules.setup()
-    elif sys.argv[1] == "--version" or sys.argv[1] == "-v":
-        modules.common_functions.version()
-    elif sys.argv[1] == "--help" or sys.argv[1] == "-h":
-        modules.common_functions.usage()
-    else:
-        modules.colour.print_err("input error []")
-        modules.usage()
-else:
-    modules.colour.print_err("input error []")
-    modules.usage()
+class ArgParser(argparse.ArgumentParser):
+    def error(self, message):
+        sys.stderr.write('error: %s\n' % message)
+        self.print_help()
+        sys.exit(2)
+
+
+def OpsWorksCLI():
+    parser = ArgParser() 
+    subparser = parser.add_subparsers(dest='subcommand')
+    parser.add_argument('-v', '--version', action='version', version='%(prog)s 0.4.9')
+    execute_recipes = subparser.add_parser('execute-recipes')
+    execute_recipes.add_argument('-r', '--region', required=True, dest='region', help='add the region you wanted to run this on [required]')
+    execute_recipes.add_argument('-s', '--stack', required=True, dest='stack', help='add the opsworks stack ID [required]')
+    execute_recipes.add_argument('-l', '--layer', required=False, dest='layer', help='add the opsworks layer ID [required]')
+    execute_recipes.add_argument('-c', '--cookbook', required=True, dest='cookbook', help='add the opsworks layer cookbook name [required]')
+    execute_recipes.add_argument('-j', '--custom-json', required=False, dest='custom_json', help='add the opsworks layer custom JSON [optional]')
+    update_custom_cookbooks = subparser.add_parser('update-custom-cookbooks')
+    update_custom_cookbooks.add_argument('-r', '--region', required=True, dest='region', help='add the region you wanted to run this on [required]')
+    update_custom_cookbooks.add_argument('-s', '--stack', required=True, dest='stack', help='add the opsworks stack ID [required]')
+    update_custom_cookbooks.add_argument('-l', '--layer', required=True, dest='layer', help='add the opsworks layer ID [required]')
+    setup = subparser.add_parser('setup')
+    setup.add_argument('-r', '--region', required=True, dest='region', help='add the region you wanted to run this on [required]')
+    setup.add_argument('-s', '--stack', required=True, dest='stack', help='add the opsworks stack ID [required]')
+    setup.add_argument('-l', '--layer', required=True, dest='layer', help='add the opsworks layer ID [required]')
+    deploy = subparser.add_parser('deploy')
+    deploy.add_argument('-r', '--region', required=True, dest='region', help='add the region you wanted to run this on [required]')
+    deploy.add_argument('-s', '--stack', required=True, dest='stack', help='add the opsworks stack ID [required]')
+    deploy.add_argument('-l', '--layer', required=True, dest='layer', help='add the opsworks layer ID [required]')
+    deploy.add_argument('-j', '--custom-json', required=False, dest='custom_json', help='add the opsworks layer custom JSON [optional]')
+    if len(sys.argv)==1:
+        parser.print_help()
+        sys.exit(1)
+    args = parser.parse_args()
+    if args.subcommand == 'execute-recipes':
+        modules.execute_recipes(args.region, args.stack, args.layer, args.cookbook, args.custom_json)
+    elif args.subcommand == 'update-custom-cookbooks':
+        modules.update_custom_cookbooks(args.region, args.stack, args.layer)
+    elif args.subcommand == 'setup':
+        modules.setup(args.region, args.stack, args.layer)
+    elif args.subcommand == 'deploy':
+        modules.deploy(args.region, args.stack, args.layer)
+
+if __name__ == '__main__':
+    OpsWorksCLI()

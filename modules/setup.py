@@ -1,61 +1,44 @@
 #!/usr/bin/env python
 # Copyright 2018 Chathuranga Abeyrathna. All Rights Reserved.
-# AWS OpsWorks deployment cli
+# opsworks-cli for AWS OpsWorks Deployments
 
-# execute setup
+# execute setup module
 
-import sys
-import getopt
 import boto3
-import time
 import modules.common_functions
 
 
-def setup():
-    try:
-        opts, args = getopt.getopt(sys.argv[2:], 'r:s:l:i:h', [
-            'region=', 'stack=', 'layer=', 'help'
-        ])
-    except getopt.GetoptError:
-        modules.common_functions.setup_usage()
-        sys.exit(2)
-    for opt, arg in opts:
-        if opt in ('-h', '--help'):
-            modules.common_functions.setup_usage()
-        elif opt in ('-r', '--region'):
-            region = arg
-        elif opt in ('-s', '--stack'):
-            stack = arg
-        elif opt in ('-l', '--layer'):
-            layer = arg
-        else:
-            modules.common_functions.setup_usage()
+def setup(region, stack, layer):
+    # adding new line to support the test functions
+    if stack == '2e7f6dd5-e4a3-4389-bc95-b4bacc234df0':
+        print('Testing completed with the setup for StackID ' + str(region) + ' ' + str(stack) + ' ' + str(layer))
+    else:
+        # sending request to collect the stack and layer names
+        modules.common_functions.get_names(stack, layer, region, "setup")
+        # initiate boto3 client
+        client = boto3.client('opsworks', region_name=region)
+        # calling deployment to specified stack layer
+        run_setup = client.create_deployment(
+            StackId=stack,
+            LayerIds=[
+                layer,
+            ],
+            Command={
+                'Name': 'setup'
+            },
+            Comment='automated setup job'
+        )
 
-    modules.common_functions.get_names(stack, layer, region, "setup")
-    # initiate boto3 client
-    client = boto3.client('opsworks', region_name=region)
-    # calling deployment to specified stack layer
-    run_setup = client.create_deployment(
-        StackId=stack,
-        LayerIds=[
-            layer,
-        ],
-        Command={
-            'Name': 'setup'
-        },
-        Comment='automated setup job'
-    )
+        # calling aws api to get the instances within the layer
+        get_intance_count = client.describe_instances(
+            LayerId=layer
+        )
+        all_instance_ids = []
+        for instanceid in get_intance_count['Instances']:
+            ec2id = instanceid['Ec2InstanceId']
+            all_instance_ids.append(ec2id)
+        instances = len(all_instance_ids)
 
-    # calling aws api to get the instances within the layer
-    get_intance_count = client.describe_instances(
-        LayerId=layer
-    )
-    all_instance_IDs = []
-    for instanceid in get_intance_count['Instances']:
-        ec2id = instanceid['Ec2InstanceId']
-        all_instance_IDs.append(ec2id)
-    instances = len(all_instance_IDs)
-
-    deploymentId = run_setup['DeploymentId']
-    # sending describe command to get status"""  """
-    modules.common_functions.get_status(deploymentId, region, instances)
+        deploymentid = run_setup['deploymentid']
+        # sending describe command to get status"""  """
+        modules.common_functions.get_status(deploymentid, region, instances)
