@@ -22,7 +22,6 @@ addons:
 script:
   - python test.py
   - sonar-scanner
-  - "python opsworks-cli"
   - "python opsworks-cli -h"
   - "python opsworks-cli -v"
   - "python opsworks-cli execute-recipes -h"

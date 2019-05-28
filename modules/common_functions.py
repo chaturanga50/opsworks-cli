@@ -110,6 +110,6 @@ def get_names(stack, layer, region, name):
         else:
             layer_name = "None"
         print("\nRunning " + str(name) + " for, "
-            + "\n stack id: " + str(stack) + " | stack name: " + str(stack_name)
-            + "\n layer id: " + str(layer) + " | layer name: "
-            + str(layer_name) + "\n")
+              + "\n stack id: " + str(stack) + " | stack name: " + str(stack_name)
+              + "\n layer id: " + str(layer) + " | layer name: "
+              + str(layer_name) + "\n")

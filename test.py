@@ -21,7 +21,7 @@ class Case(unittest.TestCase):
             modules.execute_recipes('eu-west-1', '2e7f6dd5-e4a3-4389-bc95-b4bacc234df0', 'ac0df176-104b-46ae-946e-7cf7367b816e', 'apache2::default')
         output = usage_stdout.getvalue().strip()
         self.assertIn('2e7f6dd5-e4a3-4389-bc95-b4bacc234df0', output)
-        
+
     def test_execute_recipes_json(self):
         usage_stdout = StringIO()
         with contextlib.redirect_stdout(usage_stdout):
@@ -77,7 +77,7 @@ class Case(unittest.TestCase):
             modules.common_functions.get_names('2e7f6dd5-e4a3-4389-bc95-b4bacc234df0', 'ac0df176-104b-46ae-946e-7cf7367b816e', 'eu-west-1', 'setup')
         output = usage_stdout.getvalue().strip()
         self.assertIn('setup', output)
-    
+
     def test_run_getstatus(self):
         usage_stdout = StringIO()
         with contextlib.redirect_stdout(usage_stdout):

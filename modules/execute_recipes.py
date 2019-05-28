@@ -37,7 +37,7 @@ def run_recipes_with_json(region, stack, layer, cookbook, custom_json, instances
 def run_recipes_without_json(region, stack, layer, cookbook, instances):
     # adding new line to support the test functions
     if stack == '2e7f6dd5-e4a3-4389-bc95-b4bacc234df0':
-        print('Testing completed with the execute recipes without custom_json for StackID ' + str(region) + ' ' + str(stack) + ' ' + str(layer) + ' ' + str(cookbook) + ' ' + str(instances) )
+        print('Testing completed with the execute recipes without custom_json for StackID ' + str(region) + ' ' + str(stack) + ' ' + str(layer) + ' ' + str(cookbook) + ' ' + str(instances))
     else:
         # initiate boto3 client
         client = boto3.client('opsworks', region_name=region)
