@@ -7,7 +7,7 @@ import logging
 import sys
 import modules.execute_recipes
 
-if sys.version_info < (3, 4):
+if sys.version_info < (3, 3):
     import StringIO
 
 region = 'eu-west-1'
@@ -19,7 +19,7 @@ instances = 2
 
 
 class Case2(unittest.TestCase):
-    if sys.version_info < (3, 4):
+    if sys.version_info < (3, 3):
         def test_execute_recipes1(self):
             stdout = sys.stdout
             s = StringIO.StringIO()
