@@ -45,13 +45,13 @@ def OpsWorksCLI():
         sys.exit(1)
     args = parser.parse_args()
     if args.subcommand == 'execute-recipes':
-        modules.execute_recipes(args.region, args.stack, args.layer, args.cookbook, args.custom_json)
+        modules.execute_recipes(region=args.region, stack=args.stack, cookbook=args.cookbook, layer=args.layer, custom_json=args.custom_json)
     elif args.subcommand == 'update-custom-cookbooks':
-        modules.update_custom_cookbooks(args.region, args.stack, args.layer)
+        modules.update_custom_cookbooks(region=args.region, stack=args.stack, layer=args.layer)
     elif args.subcommand == 'setup':
-        modules.setup(args.region, args.stack, args.layer)
+        modules.setup(region=args.region, stack=args.stack, layer=args.layer)
     elif args.subcommand == 'deploy':
-        modules.deploy(args.region, args.stack, args.layer)
+        modules.deploy(region=args.region, stack=args.stack, layer=args.layer)
 
 if __name__ == '__main__':
     OpsWorksCLI()
