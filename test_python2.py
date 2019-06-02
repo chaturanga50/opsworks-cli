@@ -27,7 +27,7 @@ class Case2(unittest.TestCase):
             modules.execute_recipes(region=region, stack=stack, cookbook=cookbook)
             sys.stdout = stdout
             s.seek(0)
-            self.assertIn('execute_recipes main function testing without layer_id and custom_json', s.read())
+            self.assertIn('execute_recipes main function testing', s.read())
 
         def test_execute_recipes2(self):
             stdout = sys.stdout
@@ -36,7 +36,7 @@ class Case2(unittest.TestCase):
             modules.execute_recipes(region=region, stack=stack, cookbook=cookbook, layer=layer)
             sys.stdout = stdout
             s.seek(0)
-            self.assertIn('execute_recipes main function testing with layer_id without custom_json', s.read())
+            self.assertIn('execute_recipes main function testing', s.read())
 
         def test_execute_recipes3(self):
             stdout = sys.stdout
@@ -45,7 +45,7 @@ class Case2(unittest.TestCase):
             modules.execute_recipes(region=region, stack=stack, cookbook=cookbook, custom_json=custom_json)
             sys.stdout = stdout
             s.seek(0)
-            self.assertIn('execute_recipes main function testing with custom_json and without layer_id', s.read())
+            self.assertIn('execute_recipes main function testing', s.read())
 
         def test_execute_recipes4(self):
             stdout = sys.stdout
@@ -54,25 +54,43 @@ class Case2(unittest.TestCase):
             modules.execute_recipes(region=region, stack=stack, cookbook=cookbook, layer=layer, custom_json=custom_json)
             sys.stdout = stdout
             s.seek(0)
-            self.assertIn('execute_recipes main function testing with custom_json and layer_id', s.read())
+            self.assertIn('execute_recipes main function testing', s.read())
 
-        def test_run_recipes_without_json(self):
+        def test_run_recipes_without_layer(self):
             stdout = sys.stdout
             s = StringIO.StringIO()
             sys.stdout = s
-            modules.run_recipes_without_json(region=region, stack=stack, cookbook=cookbook, layer=layer, instances=instances)
+            modules.run_recipes_without_layer(region=region, stack=stack, cookbook=cookbook, custom_json=custom_json)
             sys.stdout = stdout
             s.seek(0)
-            self.assertIn('run_recipes_without_json sub function testing without custom_json with layer_id', s.read())
+            self.assertIn('run_recipes_without_layer sub function', s.read())
 
-        def test_run_recipes_with_json(self):
+        def test_run_recipes_without_layer2(self):
             stdout = sys.stdout
             s = StringIO.StringIO()
             sys.stdout = s
-            modules.run_recipes_with_json(region=region, stack=stack, layer=layer, cookbook=cookbook, instances=instances, custom_json=custom_json)
+            modules.run_recipes_without_layer(region=region, stack=stack, cookbook=cookbook)
             sys.stdout = stdout
             s.seek(0)
-            self.assertIn('run_recipes_with_json sub function testing with custom_json without layer_id', s.read())
+            self.assertIn('run_recipes_without_layer sub function', s.read())
+
+        def run_recipes_with_layer(self):
+            stdout = sys.stdout
+            s = StringIO.StringIO()
+            sys.stdout = s
+            modules.run_recipes_with_layer(region=region, stack=stack, layer=layer, cookbook=cookbook, custom_json=custom_json)
+            sys.stdout = stdout
+            s.seek(0)
+            self.assertIn('run_recipes_with_layer sub function', s.read())
+
+        def run_recipes_with_layer2(self):
+            stdout = sys.stdout
+            s = StringIO.StringIO()
+            sys.stdout = s
+            modules.run_recipes_with_layer(region=region, stack=stack, layer=layer, cookbook=cookbook)
+            sys.stdout = stdout
+            s.seek(0)
+            self.assertIn('run_recipes_with_layer sub function', s.read())
     else:
         print('python version is higher than 3.4')
 
