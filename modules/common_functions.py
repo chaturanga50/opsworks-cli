@@ -17,6 +17,48 @@ def summary(success_count, skipped_count, failed_count):
     print(table.get_string(title="Summary"))
 
 
+def get_status_instances(region, deploymentid, instances, success_count, skipped_count, failed_count, fail_skip_count, success_fail_count):
+    # adding new line to support the test functions
+    if deploymentid == '2e7f6dd5e4a34389bc95b4bacc234df0':
+        print('get_status_instances sub function testing')
+    else:
+        client = boto3.client('opsworks', region_name=region)
+        describe_deployment = client.describe_commands(
+            DeploymentId=deploymentid
+        )
+        if success_count == int(instances):
+            modules.colour.print_success("\nDeployment completed...")
+            summary(success_count, skipped_count, failed_count)
+            print("\nCheck the deployment logs...\n")
+            for logs in describe_deployment['Commands']:
+                print(logs['LogUrl'])
+        elif skipped_count == int(instances):
+            modules.colour.print_warning("\nDeployment skipped...")
+            summary(success_count, skipped_count, failed_count)
+            print("\nCheck the deployment logs...\n")
+            for logs in describe_deployment['Commands']:
+                print(logs['LogUrl'])
+        elif failed_count == int(instances):
+            modules.colour.print_err("\nDeployment failed...")
+            summary(success_count, skipped_count, failed_count)
+            print("\nCheck the deployment logs...\n")
+            for logs in describe_deployment['Commands']:
+                print(logs['LogUrl'])
+        elif fail_skip_count == int(instances):
+            modules.colour.print_muted("\nDeployment failed and some of them skipped...")
+            summary(success_count, skipped_count, failed_count)
+            print("\nCheck the deployment logs...\n")
+            for logs in describe_deployment['Commands']:
+                print(logs['LogUrl'])
+        elif success_fail_count == int(instances):
+            modules.colour.print_warning(
+                "\nDeployment success on some instances and some are got failed...")
+            summary(success_count, skipped_count, failed_count)
+            print("\nCheck the deployment logs...\n")
+            for logs in describe_deployment['Commands']:
+                print(logs['LogUrl'])
+
+
 def get_status(deploymentid, region, instances):
     # adding new line to support the test functions
     if deploymentid == '2e7f6dd5e4a34389bc95b4bacc234df0':
@@ -53,37 +95,7 @@ def get_status(deploymentid, region, instances):
                     fail_skip_count = int(instances)
                 elif int(success_count) + int(failed_count) == int(instances):
                     success_fail_count = int(instances)
-            if success_count == int(instances):
-                modules.colour.print_success("\nDeployment completed...")
-                summary(success_count, skipped_count, failed_count)
-                print("\nCheck the deployment logs...\n")
-                for logs in describe_deployment['Commands']:
-                    print(logs['LogUrl'])
-            elif skipped_count == int(instances):
-                modules.colour.print_warning("\nDeployment skipped...")
-                summary(success_count, skipped_count, failed_count)
-                print("\nCheck the deployment logs...\n")
-                for logs in describe_deployment['Commands']:
-                    print(logs['LogUrl'])
-            elif failed_count == int(instances):
-                modules.colour.print_err("\nDeployment failed...")
-                summary(success_count, skipped_count, failed_count)
-                print("\nCheck the deployment logs...\n")
-                for logs in describe_deployment['Commands']:
-                    print(logs['LogUrl'])
-            elif fail_skip_count == int(instances):
-                modules.colour.print_muted("\nDeployment failed and some of them skipped...")
-                summary(success_count, skipped_count, failed_count)
-                print("\nCheck the deployment logs...\n")
-                for logs in describe_deployment['Commands']:
-                    print(logs['LogUrl'])
-            elif success_fail_count == int(instances):
-                modules.colour.print_warning(
-                    "\nDeployment success on some instances and some are got failed...")
-                summary(success_count, skipped_count, failed_count)
-                print("\nCheck the deployment logs...\n")
-                for logs in describe_deployment['Commands']:
-                    print(logs['LogUrl'])
+            get_status_instances(region, deploymentid, instances, success_count, skipped_count, failed_count, fail_skip_count, success_fail_count)
         except Exception as e:
             print(e)
 
