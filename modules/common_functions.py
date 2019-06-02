@@ -18,8 +18,8 @@ def summary(success_count, skipped_count, failed_count):
 
 
 def summary_fail_skipped(success_count, fail_skip_count, success_fail_count):
-    failed_count=success_fail_count-success_count
-    skipped_count=fail_skip_count-failed_count
+    failed_count = success_fail_count - success_count
+    skipped_count = fail_skip_count - failed_count
     table = prettytable.PrettyTable()
     table.field_names = ["Success", "Skipped", "Failed"]
     table.add_row([str(success_count), str(skipped_count), str(failed_count)])
