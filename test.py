@@ -89,7 +89,7 @@ class Case(unittest.TestCase):
         def test_run_deploy_json(self):
             usage_stdout = StringIO()
             with contextlib.redirect_stdout(usage_stdout):
-                modules.deploy(region=region, stack=stack, layer=layer, cookbook=cookbook)
+                modules.deploy(region=region, stack=stack, layer=layer)
             output = usage_stdout.getvalue().strip()
             self.assertIn('2e7f6dd5-e4a3-4389-bc95-b4bacc234df0', output)
 
