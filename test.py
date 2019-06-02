@@ -94,14 +94,14 @@ class Case(unittest.TestCase):
                 modules.setup(region=region, stack=stack, layer=layer)
             output = usage_stdout.getvalue().strip()
             self.assertIn('setup main function testing', output)
-        
+
         def test_run_setup_with_layer(self):
             usage_stdout = StringIO()
             with contextlib.redirect_stdout(usage_stdout):
                 modules.setup_with_layer(region=region, stack=stack, layer=layer)
             output = usage_stdout.getvalue().strip()
             self.assertIn('setup_with_layer sub function testing', output)
-        
+
         def test_run_setup_without_layer(self):
             usage_stdout = StringIO()
             with contextlib.redirect_stdout(usage_stdout):
