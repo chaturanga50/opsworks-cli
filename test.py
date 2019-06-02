@@ -68,28 +68,28 @@ class Case(unittest.TestCase):
         def test_run_update_custom_cookbook(self):
             usage_stdout = StringIO()
             with contextlib.redirect_stdout(usage_stdout):
-                modules.update_custom_cookbooks('eu-west-1', '2e7f6dd5-e4a3-4389-bc95-b4bacc234df0', 'ac0df176-104b-46ae-946e-7cf7367b816e')
+                modules.update_custom_cookbooks(region=region, stack=stack, layer=layer)
             output = usage_stdout.getvalue().strip()
-            self.assertIn('2e7f6dd5-e4a3-4389-bc95-b4bacc234df0', output)
+            self.assertIn('update_custom_cookbooks main function testing', output)
 
         def test_run_setup(self):
             usage_stdout = StringIO()
             with contextlib.redirect_stdout(usage_stdout):
-                modules.setup('eu-west-1', '2e7f6dd5-e4a3-4389-bc95-b4bacc234df0', 'ac0df176-104b-46ae-946e-7cf7367b816e')
+                modules.setup(region=region, stack=stack, layer=layer)
             output = usage_stdout.getvalue().strip()
-            self.assertIn('2e7f6dd5-e4a3-4389-bc95-b4bacc234df0', output)
+            self.assertIn('setup main function testing', output)
 
         def test_run_deploy(self):
             usage_stdout = StringIO()
             with contextlib.redirect_stdout(usage_stdout):
-                modules.deploy('eu-west-1', '2e7f6dd5-e4a3-4389-bc95-b4bacc234df0', 'ac0df176-104b-46ae-946e-7cf7367b816e')
+                modules.deploy(region=region, stack=stack, layer=layer)
             output = usage_stdout.getvalue().strip()
             self.assertIn('2e7f6dd5-e4a3-4389-bc95-b4bacc234df0', output)
 
         def test_run_deploy_json(self):
             usage_stdout = StringIO()
             with contextlib.redirect_stdout(usage_stdout):
-                modules.deploy('eu-west-1', '2e7f6dd5-e4a3-4389-bc95-b4bacc234df0', 'ac0df176-104b-46ae-946e-7cf7367b816e', '{"sample": "sample"}')
+                modules.deploy(region=region, stack=stack, layer=layer, cookbook=cookbook)
             output = usage_stdout.getvalue().strip()
             self.assertIn('2e7f6dd5-e4a3-4389-bc95-b4bacc234df0', output)
 
