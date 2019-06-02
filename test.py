@@ -21,6 +21,7 @@ custom_json = '{"default": "version"}'
 instances = 2
 deploymentid = '2e7f6dd5e4a34389bc95b4bacc234df0'
 name = 'setup'
+name2 = 'update_custom_cookbooks'
 
 
 class Case(unittest.TestCase):
@@ -112,16 +113,51 @@ class Case(unittest.TestCase):
         def test_run_deploy(self):
             usage_stdout = StringIO()
             with contextlib.redirect_stdout(usage_stdout):
-                modules.deploy(region=region, stack=stack, layer=layer)
+                modules.deploy(region=region, stack=stack, layer=layer, custom_json=custom_json)
             output = usage_stdout.getvalue().strip()
-            self.assertIn('2e7f6dd5-e4a3-4389-bc95-b4bacc234df0', output)
+            self.assertIn('deploy main function', output)
 
         def test_run_deploy_json(self):
             usage_stdout = StringIO()
             with contextlib.redirect_stdout(usage_stdout):
                 modules.deploy(region=region, stack=stack, layer=layer)
             output = usage_stdout.getvalue().strip()
-            self.assertIn('2e7f6dd5-e4a3-4389-bc95-b4bacc234df0', output)
+            self.assertIn('deploy main function', output)
+
+        def test_run_deploy_json2(self):
+            usage_stdout = StringIO()
+            with contextlib.redirect_stdout(usage_stdout):
+                modules.deploy(region=region, stack=stack, custom_json=custom_json)
+            output = usage_stdout.getvalue().strip()
+            self.assertIn('deploy main function', output)
+
+        def test_run_deploy_with_layer(self):
+            usage_stdout = StringIO()
+            with contextlib.redirect_stdout(usage_stdout):
+                modules.deploy_with_layer(region=region, stack=stack, layer=layer, custom_json=custom_json)
+            output = usage_stdout.getvalue().strip()
+            self.assertIn('deploy_with_layer sub function', output)
+
+        def test_run_deploy_with_layer2(self):
+            usage_stdout = StringIO()
+            with contextlib.redirect_stdout(usage_stdout):
+                modules.deploy_with_layer(region=region, stack=stack, layer=layer)
+            output = usage_stdout.getvalue().strip()
+            self.assertIn('deploy_with_layer sub function', output)
+
+        def test_run_deploy_without_layer(self):
+            usage_stdout = StringIO()
+            with contextlib.redirect_stdout(usage_stdout):
+                modules.deploy_without_layer(region=region, stack=stack, custom_json=custom_json)
+            output = usage_stdout.getvalue().strip()
+            self.assertIn('deploy_without_layer sub function', output)
+
+        def test_run_deploy_without_layer2(self):
+            usage_stdout = StringIO()
+            with contextlib.redirect_stdout(usage_stdout):
+                modules.deploy_without_layer(region=region, stack=stack)
+            output = usage_stdout.getvalue().strip()
+            self.assertIn('deploy_without_layer sub function', output)
 
         def test_run_getnames(self):
             usage_stdout = StringIO()
@@ -129,6 +165,13 @@ class Case(unittest.TestCase):
                 modules.common_functions.get_names(stack=stack, layer=layer, region=region, name=name)
             output = usage_stdout.getvalue().strip()
             self.assertIn('setup', output)
+
+        def test_run_getnames2(self):
+            usage_stdout = StringIO()
+            with contextlib.redirect_stdout(usage_stdout):
+                modules.common_functions.get_names(stack=stack, layer=layer, region=region, name=name2)
+            output = usage_stdout.getvalue().strip()
+            self.assertIn('update_custom_cookbook', output)
 
         def test_run_getstatus(self):
             usage_stdout = StringIO()
