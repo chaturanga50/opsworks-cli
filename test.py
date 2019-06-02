@@ -19,6 +19,8 @@ layer = 'ac0df176-104b-46ae-946e-7cf7367b816e'
 cookbook = 'apache2::default'
 custom_json = '{"default": "version"}'
 instances = 2
+deploymentid = '2e7f6dd5e4a34389bc95b4bacc234df0'
+name = 'setup'
 
 
 class Case(unittest.TestCase):
@@ -72,12 +74,40 @@ class Case(unittest.TestCase):
             output = usage_stdout.getvalue().strip()
             self.assertIn('update_custom_cookbooks main function testing', output)
 
+        def test_run_update_custom_cookbooks_with_layer(self):
+            usage_stdout = StringIO()
+            with contextlib.redirect_stdout(usage_stdout):
+                modules.update_custom_cookbooks_with_layer(region=region, stack=stack, layer=layer)
+            output = usage_stdout.getvalue().strip()
+            self.assertIn('update_custom_cookbooks_with_layer sub function testing', output)
+
+        def test_run_update_custom_cookbooks_without_layer(self):
+            usage_stdout = StringIO()
+            with contextlib.redirect_stdout(usage_stdout):
+                modules.update_custom_cookbooks_without_layer(region=region, stack=stack)
+            output = usage_stdout.getvalue().strip()
+            self.assertIn('update_custom_cookbooks_without_layer sub function testing', output)
+
         def test_run_setup(self):
             usage_stdout = StringIO()
             with contextlib.redirect_stdout(usage_stdout):
                 modules.setup(region=region, stack=stack, layer=layer)
             output = usage_stdout.getvalue().strip()
             self.assertIn('setup main function testing', output)
+        
+        def test_run_setup_with_layer(self):
+            usage_stdout = StringIO()
+            with contextlib.redirect_stdout(usage_stdout):
+                modules.setup_with_layer(region=region, stack=stack, layer=layer)
+            output = usage_stdout.getvalue().strip()
+            self.assertIn('setup_with_layer sub function testing', output)
+        
+        def test_run_setup_without_layer(self):
+            usage_stdout = StringIO()
+            with contextlib.redirect_stdout(usage_stdout):
+                modules.setup_without_layer(region=region, stack=stack)
+            output = usage_stdout.getvalue().strip()
+            self.assertIn('setup_without_layer sub function testing', output)
 
         def test_run_deploy(self):
             usage_stdout = StringIO()
@@ -96,14 +126,14 @@ class Case(unittest.TestCase):
         def test_run_getnames(self):
             usage_stdout = StringIO()
             with contextlib.redirect_stdout(usage_stdout):
-                modules.common_functions.get_names('2e7f6dd5-e4a3-4389-bc95-b4bacc234df0', 'ac0df176-104b-46ae-946e-7cf7367b816e', 'eu-west-1', 'setup')
+                modules.common_functions.get_names(stack=stack, layer=layer, region=region, name=name)
             output = usage_stdout.getvalue().strip()
             self.assertIn('setup', output)
 
         def test_run_getstatus(self):
             usage_stdout = StringIO()
             with contextlib.redirect_stdout(usage_stdout):
-                modules.common_functions.get_status('2e7f6dd5e4a34389bc95b4bacc234df0', 'eu-west-1', '2')
+                modules.common_functions.get_status(deploymentid=deploymentid, region=region, instances=instances)
             output = usage_stdout.getvalue().strip()
             self.assertIn('2e7f6dd5e4a34389bc95b4bacc234df0', output)
 
