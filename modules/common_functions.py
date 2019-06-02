@@ -26,37 +26,36 @@ def get_status_instances(region, deploymentid, instances, success_count, skipped
         describe_deployment = client.describe_commands(
             DeploymentId=deploymentid
         )
+        deploymentlogs = []
+        for logs in describe_deployment['Commands']:
+            deploymentlog = logs['LogUrl']
+            deploymentlogs.append(deploymentlog)
         if success_count == int(instances):
             modules.colour.print_success("\nDeployment completed...")
             summary(success_count, skipped_count, failed_count)
             print("\nCheck the deployment logs...\n")
-            for logs in describe_deployment['Commands']:
-                print(logs['LogUrl'])
+            print(deploymentlogs)
         elif skipped_count == int(instances):
             modules.colour.print_warning("\nDeployment skipped...")
             summary(success_count, skipped_count, failed_count)
             print("\nCheck the deployment logs...\n")
-            for logs in describe_deployment['Commands']:
-                print(logs['LogUrl'])
+            print(deploymentlogs)
         elif failed_count == int(instances):
             modules.colour.print_err("\nDeployment failed...")
             summary(success_count, skipped_count, failed_count)
             print("\nCheck the deployment logs...\n")
-            for logs in describe_deployment['Commands']:
-                print(logs['LogUrl'])
+            print(deploymentlogs)
         elif fail_skip_count == int(instances):
             modules.colour.print_muted("\nDeployment failed and some of them skipped...")
             summary(success_count, skipped_count, failed_count)
             print("\nCheck the deployment logs...\n")
-            for logs in describe_deployment['Commands']:
-                print(logs['LogUrl'])
+            print(deploymentlogs)
         elif success_fail_count == int(instances):
             modules.colour.print_warning(
                 "\nDeployment success on some instances and some are got failed...")
             summary(success_count, skipped_count, failed_count)
             print("\nCheck the deployment logs...\n")
-            for logs in describe_deployment['Commands']:
-                print(logs['LogUrl'])
+            print(deploymentlogs)
 
 
 def get_status(deploymentid, region, instances):
