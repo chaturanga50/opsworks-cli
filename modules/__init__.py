@@ -3,7 +3,11 @@ from modules.execute_recipes import run_recipes_with_json
 from modules.execute_recipes import run_recipes_without_json
 from modules.deploy import deploy
 from modules.update_custom_cookbooks import update_custom_cookbooks
+from modules.update_custom_cookbooks import update_custom_cookbooks_with_layer
+from modules.update_custom_cookbooks import update_custom_cookbooks_without_layer
 from modules.setup import setup
+from modules.setup import setup_with_layer
+from modules.setup import setup_without_layer
 from modules.common_functions import summary
 from modules.common_functions import get_status
 from modules.common_functions import get_names
