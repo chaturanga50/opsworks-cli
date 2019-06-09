@@ -8,7 +8,7 @@ A simple python module to work with aws opsworks.
 [![Build Status](https://travis-ci.org/chaturanga50/opsworks-cli.svg?branch=master)](https://travis-ci.org/chaturanga50/opsworks-cli) [![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=chaturanga50_opsworks-cli&metric=alert_status)](https://sonarcloud.io/dashboard?id=chaturanga50_opsworks-cli)
 [![SonarCloud Coverage](https://sonarcloud.io/api/project_badges/measure?project=chaturanga50_opsworks-cli&metric=coverage)](https://sonarcloud.io/component_measures/metric/coverage/list?id=chaturanga50_opsworks-cli)
 [![SonarCloud Bugs](https://sonarcloud.io/api/project_badges/measure?project=chaturanga50_opsworks-cli&metric=bugs)](https://sonarcloud.io/component_measures/metric/reliability_rating/list?id=chaturanga50_opsworks-cli)
-[![SonarCloud Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=chaturanga50_opsworks-cli&metric=vulnerabilities)](https://sonarcloud.io/component_measures/metric/security_rating/list?id=chaturanga50_opsworks-cli) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![SonarCloud Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=chaturanga50_opsworks-cli&metric=vulnerabilities)](https://sonarcloud.io/component_measures/metric/security_rating/list?id=chaturanga50_opsworks-cli) [![PyPI version](https://badge.fury.io/py/opsworks-cli.svg)](https://badge.fury.io/py/opsworks-cli) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 How to install
 --------------
