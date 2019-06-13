@@ -163,7 +163,7 @@ How it works
 
 - sending opsworks commands via aws api to specific stack or layer id.
 - then `opsworks-cli` is waiting for the response output from aws api.
-- once we got the respomse from aws api, `opsworks-cli` will show the final output accordingly.
+- once we got the response from aws api, `opsworks-cli` will show the final output accordingly.
 
 Contributing
 ------------
