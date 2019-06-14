@@ -10,6 +10,7 @@ notifications:
     - chaturanga50@gmail.com
 install:
   - pip install pycodestyle
+  - pip install coverage
   - pip install -r requirements.txt
   - python setup.py install
 env:
@@ -22,6 +23,9 @@ addons:
 script:
   - python test.py
   - python test_python2.py
+  - coverage erase
+  - coverage run --branch --source=. test.py
+  - coverage xml -i
   - sonar-scanner
   - "python opsworks-cli -h"
   - "python opsworks-cli -v"
