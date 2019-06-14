@@ -39,6 +39,7 @@ def OpsWorksCLI():
     deploy.add_argument('-r', '--region', required=True, dest='region', help='add the region you wanted to run this on [required]')
     deploy.add_argument('-s', '--stack', required=True, dest='stack', help='add the opsworks stack ID [required]')
     deploy.add_argument('-l', '--layer', required=False, dest='layer', help='add the opsworks layer ID [required]')
+    deploy.add_argument('-a', '--app', required=True, dest='app', help='add the opsworks application ID [required]')
     deploy.add_argument('-j', '--custom-json', required=False, dest='custom_json', help='add the opsworks layer custom JSON [optional]')
     if len(sys.argv)==1:
         parser.print_help()
@@ -51,7 +52,7 @@ def OpsWorksCLI():
     elif args.subcommand == 'setup':
         modules.setup(region=args.region, stack=args.stack, layer=args.layer)
     elif args.subcommand == 'deploy':
-        modules.deploy(region=args.region, stack=args.stack, layer=args.layer)
+        modules.deploy(region=args.region, stack=args.stack, layer=args.layer, app=args.app, custom_json=args.custom_json)
 
 if __name__ == '__main__':
     OpsWorksCLI()

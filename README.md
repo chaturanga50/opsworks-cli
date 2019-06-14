@@ -97,20 +97,6 @@ setup
 * region - OpsWorks stack region (required)
 * stack - OpsWorks stack ID (required)
 * layer - OpsWorks layer ID (optional)
-* custom-json - custom json file with extra vars (optional)
-```
-
-```bash
-opsworks-cli setup --region eu-west-1 \
-             --stack 2e7f6dd5-e4a3-4389-bc95-b4bacc234df0 \
-             --layer ac0df176-104b-46ae-946e-7cf7367b816e \
-             --custom-json [{"lamp":{ "packages": { "app-sso": "17.1.6" } } }]
-```
-
-```bash
-opsworks-cli setup --region eu-west-1 \
-             --stack 2e7f6dd5-e4a3-4389-bc95-b4bacc234df0 \
-             --custom-json [{"lamp":{ "packages": { "app-sso": "17.1.6" } } }]
 ```
 
 ```bash
