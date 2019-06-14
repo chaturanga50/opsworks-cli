@@ -10,10 +10,9 @@ import modules.execute_recipes
 if sys.version_info < (3, 3):
     import StringIO
 
-region = 'us-west-2'
-stack = '6f210730-19ec-4369-b1dc-0148480d5a56'
-layer = '0d5e11ed-36d4-42d0-a353-fbf7d6c80410'
-app = '2da891ea-1809-480d-a799-cb2c08746115'
+region = 'eu-west-1'
+stack = '2e7f6dd5-e4a3-4389-bc95-b4bacc234df0'
+layer = 'ac0df176-104b-46ae-946e-7cf7367b816e'
 cookbook = 'apache2::default'
 custom_json = '{"default": "version"}'
 instances = 2

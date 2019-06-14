@@ -13,9 +13,9 @@ import modules.deploy
 import modules.setup
 import modules.common_functions
 
-region = 'us-west-2'
-stack = '6f210730-19ec-4369-b1dc-0148480d5a56'
-layer = '0d5e11ed-36d4-42d0-a353-fbf7d6c80410'
+region = 'eu-west-1'
+stack = '2e7f6dd5-e4a3-4389-bc95-b4bacc234df0'
+layer = 'ac0df176-104b-46ae-946e-7cf7367b816e'
 app = '2da891ea-1809-480d-a799-cb2c08746115'
 cookbook = 'apache2::default'
 custom_json = '{"default": "version"}'
@@ -128,21 +128,21 @@ class Case(unittest.TestCase):
         def test_run_deploy(self):
             usage_stdout = StringIO()
             with contextlib.redirect_stdout(usage_stdout):
-                modules.deploy(region=region, stack=stack, layer=layer, custom_json=custom_json)
+                modules.deploy(region=region, stack=stack, layer=layer, app=app, custom_json=custom_json)
             output = usage_stdout.getvalue().strip()
             self.assertIn('deploy main function', output)
 
         def test_run_deploy_json(self):
             usage_stdout = StringIO()
             with contextlib.redirect_stdout(usage_stdout):
-                modules.deploy(region=region, stack=stack, layer=layer)
+                modules.deploy(region=region, stack=stack, layer=layer, app=app)
             output = usage_stdout.getvalue().strip()
             self.assertIn('deploy main function', output)
 
         def test_run_deploy_json2(self):
             usage_stdout = StringIO()
             with contextlib.redirect_stdout(usage_stdout):
-                modules.deploy(region=region, stack=stack, custom_json=custom_json)
+                modules.deploy(region=region, stack=stack, app=app, custom_json=custom_json)
             output = usage_stdout.getvalue().strip()
             self.assertIn('deploy main function', output)
 
