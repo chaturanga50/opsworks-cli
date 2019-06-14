@@ -47,6 +47,6 @@ def deploy(region, stack, layer, custom_json=None):
             all_instance_ids.append(ec2id)
         instances = len(all_instance_ids)
 
-        deploymentid = run_recipes['deploymentid']
+        deploymentid = run_recipes['DeploymentId']
         # sending describe command to get status"""  """
         modules.common_functions.get_status(deploymentid, region, instances)

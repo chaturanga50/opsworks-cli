@@ -39,6 +39,6 @@ def setup(region, stack, layer):
             all_instance_ids.append(ec2id)
         instances = len(all_instance_ids)
 
-        deploymentid = run_setup['deploymentid']
+        deploymentid = run_setup['DeploymentId']
         # sending describe command to get status"""  """
         modules.common_functions.get_status(deploymentid, region, instances)
