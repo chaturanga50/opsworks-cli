@@ -26,7 +26,6 @@ def run_recipes_with_layer(region, stack, layer, cookbook, custom_json=None):
             custom_json
         except NameError:
             custom_json = str({})
-        custom_json = custom_json
         if custom_json is None:
             custom_json = str({})
         # initiate boto3 client
@@ -71,7 +70,6 @@ def run_recipes_without_layer(region, stack, cookbook, custom_json=None):
             custom_json
         except NameError:
             custom_json = str({})
-        custom_json = custom_json
         if custom_json is None:
             custom_json = str({})
         # initiate boto3 client
