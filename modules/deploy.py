@@ -62,7 +62,6 @@ def deploy_with_layer(region, stack, layer, app, custom_json=None):
 def deploy_without_layer(region, stack, app, custom_json=None):
     if stack == '2e7f6dd5-e4a3-4389-bc95-b4bacc234df0':
         print('deploy_without_layer sub function')
-        layer = None
         test_output_summary(region, stack, app, custom_json)
     else:
         try:
