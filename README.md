@@ -19,6 +19,22 @@ You can download the updated release version from pypi repo using `pip` or direc
 pip install opsworks-cli
 ```
 
+Configuration
+--------------
+
+`opsworks-cli` needs to access the AWS API using your credentials. Just like the AWS SDK or CLI, it will look for credentials in two places:
+
+- From the shared credentials file (~/.aws/credentials)
+- From environment variables
+
+To use the credentials file, create a `~/.aws/credentials` file based on the template below:
+
+``` bash
+[default]
+aws_access_key_id=your_access_key
+aws_secret_access_key=your_secret_key
+```
+
 Usage
 -----
 
