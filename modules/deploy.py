@@ -25,7 +25,6 @@ def deploy_with_layer(region, stack, layer, app, custom_json=None):
             custom_json
         except NameError:
             custom_json = str({})
-        custom_json = custom_json
         if custom_json is None:
             custom_json = str({})
         # initiate boto3 client
@@ -68,7 +67,6 @@ def deploy_without_layer(region, stack, app, custom_json=None):
             custom_json
         except NameError:
             custom_json = str({})
-        custom_json = custom_json
         if custom_json is None:
             custom_json = str({})
         # initiate boto3 client
