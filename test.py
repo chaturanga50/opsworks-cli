@@ -201,21 +201,21 @@ class Case(unittest.TestCase):
                 modules.common_functions.summary(100, 50, 10)
             output = summary_stdout.getvalue().strip()
             self.assertIn('Success', output)
-        
+
         def test_summary_fail_skipped(self):
             summary_stdout = StringIO()
             with contextlib.redirect_stdout(summary_stdout):
                 modules.common_functions.summary_fail_skipped(100, 50, 10)
             output = summary_stdout.getvalue().strip()
             self.assertIn('Success', output)
-        
+
         def test_get_status_instances_main(self):
             summary_stdout = StringIO()
             with contextlib.redirect_stdout(summary_stdout):
                 modules.common_functions.get_status_instances_main(region=region, deploymentid=deploymentid, instances=instances, success_count=2, failed_count=1, skipped_count=0)
             output = summary_stdout.getvalue().strip()
             self.assertIn('get_status_instances_main', output)
-        
+
         def test_get_status_instances_sub(self):
             summary_stdout = StringIO()
             with contextlib.redirect_stdout(summary_stdout):
