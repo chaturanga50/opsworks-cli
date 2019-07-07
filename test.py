@@ -201,6 +201,34 @@ class Case(unittest.TestCase):
                 modules.common_functions.summary(100, 50, 10)
             output = summary_stdout.getvalue().strip()
             self.assertIn('Success', output)
+        
+        def test_summary_fail_skipped(self):
+            summary_stdout = StringIO()
+            with contextlib.redirect_stdout(summary_stdout):
+                modules.common_functions.summary_fail_skipped(100, 50, 10)
+            output = summary_stdout.getvalue().strip()
+            self.assertIn('Success', output)
+        
+        def test_get_status_instances_main(self):
+            summary_stdout = StringIO()
+            with contextlib.redirect_stdout(summary_stdout):
+                modules.common_functions.get_status_instances_main(region=region, deploymentid=deploymentid, instances=instances, success_count=2, failed_count=1, skipped_count=0)
+            output = summary_stdout.getvalue().strip()
+            self.assertIn('get_status_instances_main', output)
+        
+        def test_get_status_instances_sub(self):
+            summary_stdout = StringIO()
+            with contextlib.redirect_stdout(summary_stdout):
+                modules.common_functions.get_status_instances_sub(region=region, deploymentid=deploymentid, instances=instances, success_count=5, fail_skip_count=2, success_fail_count=0)
+            output = summary_stdout.getvalue().strip()
+            self.assertIn('get_status_instances_sub', output)
+
+        def test_deploy_test_output_summary(self):
+            summary_stdout = StringIO()
+            with contextlib.redirect_stdout(summary_stdout):
+                modules.test_output_summary(region=region, stack=stack, layer=layer, app=app, custom_json=None)
+            output = summary_stdout.getvalue().strip()
+            self.assertIn(stack, output)
 
     else:
         print('python version lowerthan 3.4')
