@@ -19,7 +19,6 @@ C_END = '\33[0m'
 
 
 def get_single_str(list_):
-    single_str = ''
     list_of_strs = []
     for elem in list_:
         list_of_strs.append(str(elem))
