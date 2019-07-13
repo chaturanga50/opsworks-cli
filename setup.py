@@ -19,7 +19,7 @@ setup(
     ],
     packages=find_packages(),
     include_package_data=True,
-    version="0.5.0",
+    version="0.5.1",
     install_requires=[
         'boto3',
         'prettytable'

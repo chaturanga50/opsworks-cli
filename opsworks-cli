@@ -20,7 +20,7 @@ class ArgParser(argparse.ArgumentParser):
 def OpsWorksCLI():
     parser = ArgParser() 
     subparser = parser.add_subparsers(dest='subcommand')
-    parser.add_argument('-v', '--version', action='version', version='%(prog)s 0.5.0')
+    parser.add_argument('-v', '--version', action='version', version='%(prog)s 0.5.1')
     execute_recipes = subparser.add_parser('execute-recipes')
     execute_recipes.add_argument('-r', '--region', required=True, dest='region', help='add the region you wanted to run this on [required]')
     execute_recipes.add_argument('-s', '--stack', required=True, dest='stack', help='add the opsworks stack ID [required]')

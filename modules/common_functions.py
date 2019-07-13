@@ -26,6 +26,14 @@ def summary_fail_skipped(success_count, fail_skip_count, success_fail_count):
     print(table.get_string(title="Summary"))
 
 
+def get_log_url(command):
+    deploymentlogs = []
+    for logs in command:
+        deploymentlog = logs['LogUrl']
+        deploymentlogs.append(deploymentlog)
+        print(deploymentlog)
+
+
 def get_status_instances_main(region, deploymentid, instances, success_count, skipped_count, failed_count):
     # adding new line to support the test functions
     if deploymentid == '2e7f6dd5e4a34389bc95b4bacc234df0':
@@ -35,25 +43,21 @@ def get_status_instances_main(region, deploymentid, instances, success_count, sk
         describe_deployment = client.describe_commands(
             DeploymentId=deploymentid
         )
-        deploymentlogs = []
-        for logs in describe_deployment['Commands']:
-            deploymentlog = logs['LogUrl']
-            deploymentlogs.append(deploymentlog)
         if success_count == int(instances):
             modules.colour.print_success("\nDeployment completed...")
             summary(success_count, skipped_count, failed_count)
             print("\nCheck the deployment logs...\n")
-            print(deploymentlogs)
+            get_log_url(describe_deployment['Commands'])
         elif skipped_count == int(instances):
             modules.colour.print_warning("\nDeployment skipped...")
             summary(success_count, skipped_count, failed_count)
             print("\nCheck the deployment logs...\n")
-            print(deploymentlogs)
+            get_log_url(describe_deployment['Commands'])
         elif failed_count == int(instances):
             modules.colour.print_err("\nDeployment failed...")
             summary(success_count, skipped_count, failed_count)
             print("\nCheck the deployment logs...\n")
-            print(deploymentlogs)
+            get_log_url(describe_deployment['Commands'])
 
 
 def get_status_instances_sub(region, deploymentid, instances, success_count, fail_skip_count, success_fail_count):
@@ -65,21 +69,17 @@ def get_status_instances_sub(region, deploymentid, instances, success_count, fai
         describe_deployment = client.describe_commands(
             DeploymentId=deploymentid
         )
-        deploymentlogs = []
-        for logs in describe_deployment['Commands']:
-            deploymentlog = logs['LogUrl']
-            deploymentlogs.append(deploymentlog)
         if fail_skip_count == int(instances):
             modules.colour.print_muted("\nDeployment failed and some of them skipped...")
             summary_fail_skipped(success_count, fail_skip_count, success_fail_count)
             print("\nCheck the deployment logs...\n")
-            print(deploymentlogs)
+            get_log_url(describe_deployment['Commands'])
         elif success_fail_count == int(instances):
             modules.colour.print_warning(
                 "\nDeployment success on some instances and some are got failed...")
             summary_fail_skipped(success_count, fail_skip_count, success_fail_count)
             print("\nCheck the deployment logs...\n")
-            print(deploymentlogs)
+            get_log_url(describe_deployment['Commands'])
 
 
 def get_status(deploymentid, region, instances):
@@ -99,7 +99,7 @@ def get_status(deploymentid, region, instances):
             success_fail_count = 0
             print("Deployment started...")
             time.sleep(2)
-            while not (success_count == int(instances) or failed_count == int(instances)):
+            while not (success_count == int(instances) or failed_count == int(instances) or skipped_count == int(instances) or fail_skip_count == int(instances) or success_fail_count == int(instances)):
                 print("Deployment not completed yet..waiting 10 seconds before send request back to aws...")
                 time.sleep(10)
                 describe_deployment = client.describe_commands(
