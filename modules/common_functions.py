@@ -62,9 +62,10 @@ def get_status(deploymentId, region, instances):
         skipped_count = 0
         failed_count = 0
         fail_skip_count = 0
+        success_fail_count = 0
         print("Deployment started...")
         time.sleep(2)
-        while not (success_count == int(instances) or failed_count == int(instances)):
+        while not (success_count == int(instances) or failed_count == int(instances) or skipped_count == int(instances) or fail_skip_count == int(instances) or success_fail_count == int(instances)):
             print("Deployment not completed yet..waiting 10 seconds before send request back to aws...")
             time.sleep(10)
             describe_deployment = client.describe_commands(
