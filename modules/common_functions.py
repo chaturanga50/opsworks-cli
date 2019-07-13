@@ -26,35 +26,6 @@ def summary_fail_skipped(success_count, fail_skip_count, success_fail_count):
     print(table.get_string(title="Summary"))
 
 
-<<<<<<< HEAD
-    try:
-        success_count = 0
-        skipped_count = 0
-        failed_count = 0
-        fail_skip_count = 0
-        success_fail_count = 0
-        print("Deployment started...")
-        time.sleep(2)
-        while not (success_count == int(instances) or failed_count == int(instances) or skipped_count == int(instances) or fail_skip_count == int(instances) or success_fail_count == int(instances)):
-            print("Deployment not completed yet..waiting 10 seconds before send request back to aws...")
-            time.sleep(10)
-            describe_deployment = client.describe_commands(
-                DeploymentId=deploymentId)
-            success_count = str(describe_deployment).count("successful")
-            skipped_count = str(describe_deployment).count("skipped")
-            failed_count = str(describe_deployment).count("failed")
-            fail_skip_count = int(skipped_count) + int(failed_count)
-            if int(success_count) + int(skipped_count) == int(instances):
-                success_count = int(instances)
-            elif int(skipped_count) == int(instances):
-                skipped_count = int(instances)
-            elif int(failed_count) == int(instances):
-                failed_count = int(instances)
-            elif int(skipped_count) + int(failed_count) == int(instances):
-                fail_skip_count = int(instances)
-            elif int(success_count) + int(failed_count) == int(instances):
-                success_fail_count = int(instances)
-=======
 def get_status_instances_main(region, deploymentid, instances, success_count, skipped_count, failed_count):
     # adding new line to support the test functions
     if deploymentid == '2e7f6dd5e4a34389bc95b4bacc234df0':
@@ -68,7 +39,6 @@ def get_status_instances_main(region, deploymentid, instances, success_count, sk
         for logs in describe_deployment['Commands']:
             deploymentlog = logs['LogUrl']
             deploymentlogs.append(deploymentlog)
->>>>>>> 57042ae9eeaae900ba96036a47a6683238638f7f
         if success_count == int(instances):
             modules.colour.print_success("\nDeployment completed...")
             summary(success_count, skipped_count, failed_count)
