@@ -1,0 +1,68 @@
+{
+    "Instances": [
+        {
+            "AgentVersion": "string",
+            "AmiId": "string",
+            "Architecture": "x86_64",
+            "Arn": "string",
+            "AutoScalingType": "load",
+            "AvailabilityZone": "string",
+            "BlockDeviceMappings": [
+                {
+                    "DeviceName": "string",
+                    "NoDevice": "string",
+                    "VirtualName": "string",
+                    "Ebs": {
+                        "SnapshotId": "string",
+                        "Iops": 123,
+                        "VolumeSize": 123,
+                        "VolumeType": "gp2",
+                        "DeleteOnTermination": "True"
+                    }
+                }
+            ],
+            "CreatedAt": "string",
+            "EbsOptimized": "True",
+            "Ec2InstanceId": "string",
+            "EcsClusterArn": "string",
+            "EcsContainerInstanceArn": "string",
+            "ElasticIp": "string",
+            "Hostname": "string",
+            "InfrastructureClass": "string",
+            "InstallUpdatesOnBoot": "True",
+            "InstanceId": "INSTANCE_ID",
+            "InstanceProfileArn": "string",
+            "InstanceType": "string",
+            "LastServiceErrorId": "string",
+            "LayerIds": [
+                "LAYERID"
+            ],
+            "Os": "string",
+            "Platform": "string",
+            "PrivateDns": "string",
+            "PrivateIp": "string",
+            "PublicDns": "string",
+            "PublicIp": "string",
+            "RegisteredBy": "string",
+            "ReportedAgentVersion": "string",
+            "ReportedOs": {
+                "Family": "string",
+                "Name": "string",
+                "Version": "string"
+            },
+            "RootDeviceType": "ebs",
+            "RootDeviceVolumeId": "string",
+            "SecurityGroupIds": [
+                "string"
+            ],
+            "SshHostDsaKeyFingerprint": "string",
+            "SshHostRsaKeyFingerprint": "string",
+            "SshKeyName": "string",
+            "StackId": "STACKID",
+            "Status": "string",
+            "SubnetId": "string",
+            "Tenancy": "string",
+            "VirtualizationType": "paravirtual"
+        }
+    ]
+}
