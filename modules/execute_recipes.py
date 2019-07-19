@@ -51,7 +51,7 @@ def run_recipes_with_layer(region, stack, layer, cookbook, custom_json=None):
         all_instance_status = []
         for instancestatus in get_intance_count['Instances']:
             ec2status = instancestatus['Status']
-            all_instance_ids.append(ec2status)
+            all_instance_status.append(ec2status)
         instances = len(all_instance_status)
         # deployment id
         deploymentid = run_recipes['DeploymentId']
@@ -95,7 +95,7 @@ def run_recipes_without_layer(region, stack, cookbook, custom_json=None):
         all_instance_status = []
         for instancestatus in get_intance_count['Instances']:
             ec2status = instancestatus['Status']
-            all_instance_ids.append(ec2status)
+            all_instance_status.append(ec2status)
         instances = len(all_instance_status)
         # deployment id
         deploymentid = run_recipes['DeploymentId']

@@ -50,7 +50,7 @@ def deploy_with_layer(region, stack, layer, app, custom_json=None):
         all_instance_status = []
         for instancestatus in get_intance_count['Instances']:
             ec2status = instancestatus['Status']
-            all_instance_ids.append(ec2status)
+            all_instance_status.append(ec2status)
         instances = len(all_instance_status)
 
         deploymentid = run_recipes['DeploymentId']
@@ -89,7 +89,7 @@ def deploy_without_layer(region, stack, app, custom_json=None):
         all_instance_status = []
         for instancestatus in get_intance_count['Instances']:
             ec2status = instancestatus['Status']
-            all_instance_ids.append(ec2status)
+            all_instance_status.append(ec2status)
         instances = len(all_instance_status)
 
         deploymentid = run_recipes['DeploymentId']
