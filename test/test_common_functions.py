@@ -15,7 +15,7 @@ class Case(unittest.TestCase):
                 with open('test/json_data/describe_commands_success.json') as json_file:
                     data = json.load(json_file)
                     boto_describe_commands.return_value = data
-                    modules.get_status('DEPLOYMENTID', 'REGION', '1')
+                    modules.get_status('DEPLOYMENTID', 'REGION', '0')
                     self.assertEqual(mock_client.call_count, 1)
 
     def test_get_status_skipped(self):
@@ -24,7 +24,7 @@ class Case(unittest.TestCase):
                 with open('test/json_data/describe_commands_skipped.json') as json_file:
                     data = json.load(json_file)
                     boto_describe_commands.return_value = data
-                    modules.get_status('DEPLOYMENTID', 'REGION', '1')
+                    modules.get_status('DEPLOYMENTID', 'REGION', '0')
                     self.assertEqual(mock_client.call_count, 1)
 
     def test_get_status_failed(self):
@@ -33,7 +33,7 @@ class Case(unittest.TestCase):
                 with open('test/json_data/describe_commands_failed.json') as json_file:
                     data = json.load(json_file)
                     boto_describe_commands.return_value = data
-                    modules.get_status('DEPLOYMENTID', 'REGION', '1')
+                    modules.get_status('DEPLOYMENTID', 'REGION', '0')
                     self.assertEqual(mock_client.call_count, 1)
 
     def test_get_status_success_skip(self):
@@ -42,7 +42,7 @@ class Case(unittest.TestCase):
                 with open('test/json_data/describe_commands_success_skiped.json') as json_file:
                     data = json.load(json_file)
                     boto_describe_commands.return_value = data
-                    modules.get_status('DEPLOYMENTID', 'REGION', '2')
+                    modules.get_status('DEPLOYMENTID', 'REGION', '0')
                     self.assertEqual(mock_client.call_count, 1)
 
     def test_get_status_success_failed(self):
@@ -51,7 +51,7 @@ class Case(unittest.TestCase):
                 with open('test/json_data/describe_commands_success_failed.json') as json_file:
                     data = json.load(json_file)
                     boto_describe_commands.return_value = data
-                    modules.get_status('DEPLOYMENTID', 'REGION', '2')
+                    modules.get_status('DEPLOYMENTID', 'REGION', '0')
                     self.assertEqual(mock_client.call_count, 1)
 
     def test_get_status_failed_skipped(self):
@@ -60,7 +60,7 @@ class Case(unittest.TestCase):
                 with open('test/json_data/describe_commands_failed_skipped.json') as json_file:
                     data = json.load(json_file)
                     boto_describe_commands.return_value = data
-                    modules.get_status('DEPLOYMENTID', 'REGION', '2')
+                    modules.get_status('DEPLOYMENTID', 'REGION', '0')
                     self.assertEqual(mock_client.call_count, 1)
 
     def test_get_status_instances_sub_fail_skip_count(self):

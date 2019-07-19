@@ -39,11 +39,11 @@ def setup_with_layer(region, stack, layer):
         get_intance_count = client.describe_instances(
             LayerId=layer
         )
-        all_instance_ids = []
-        for instanceid in get_intance_count['Instances']:
-            ec2id = instanceid['Ec2InstanceId']
-            all_instance_ids.append(ec2id)
-        instances = len(all_instance_ids)
+        all_instance_status = []
+        for instancestatus in get_intance_count['Instances']:
+            ec2status = instancestatus['Status']
+            all_instance_status.append(ec2status)
+        instances = len(all_instance_status)
 
         deploymentid = run_setup['DeploymentId']
         # sending describe command to get status"""  """
@@ -71,11 +71,11 @@ def setup_without_layer(region, stack):
         get_intance_count = client.describe_instances(
             StackId=stack
         )
-        all_instance_ids = []
-        for instanceid in get_intance_count['Instances']:
-            ec2id = instanceid['Ec2InstanceId']
-            all_instance_ids.append(ec2id)
-        instances = len(all_instance_ids)
+        all_instance_status = []
+        for instancestatus in get_intance_count['Instances']:
+            ec2status = instancestatus['Status']
+            all_instance_status.append(ec2status)
+        instances = len(all_instance_status)
 
         deploymentid = run_setup['DeploymentId']
         # sending describe command to get status"""  """

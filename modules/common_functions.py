@@ -58,7 +58,6 @@ def get_status_instances_main(region, deploymentid, instances, success_count, sk
             summary(success_count, skipped_count, failed_count)
             print("\nCheck the deployment logs...\n")
             get_log_url(describe_deployment['Commands'])
-        return describe_deployment
 
 
 def get_status_instances_sub(region, deploymentid, instances, success_count, fail_skip_count, success_fail_count):
@@ -81,7 +80,6 @@ def get_status_instances_sub(region, deploymentid, instances, success_count, fai
             summary_fail_skipped(success_count, fail_skip_count, success_fail_count)
             print("\nCheck the deployment logs...\n")
             get_log_url(describe_deployment['Commands'])
-        return describe_deployment
 
 
 def get_status(deploymentid, region, instances):
@@ -126,7 +124,6 @@ def get_status(deploymentid, region, instances):
                 elif int(success_count) + int(failed_count) == int(instances):
                     success_fail_count = int(instances)
                     get_status_instances_sub(region, deploymentid, instances, success_count, fail_skip_count, success_fail_count)
-                return describe_deployment
         except Exception as e:
             print(e)
 
