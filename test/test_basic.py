@@ -2,16 +2,13 @@
 # Copyright 2018 Chathuranga Abeyrathna. All Rights Reserved.
 # AWS OpsWorks deployment cli - Unittest for python34 and up
 # Ref - https://stackoverflow.com/questions/4219717/how-to-assert-output-with-nosetest-unittest-in-python
+# Unit testing basic fuctions of the modules
 
 import sys
 import unittest
 import contextlib
 from io import StringIO
-import modules.execute_recipes
-import modules.update_custom_cookbooks
-import modules.deploy
-import modules.setup
-import modules.common_functions
+import modules
 
 region = 'eu-west-1'
 stack = '2e7f6dd5-e4a3-4389-bc95-b4bacc234df0'
@@ -232,7 +229,6 @@ class Case(unittest.TestCase):
 
     else:
         print('python version lowerthan 3.4')
-        sys.exit(0)
 
 
 if __name__ == '__main__':

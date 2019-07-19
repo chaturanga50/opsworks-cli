@@ -1,0 +1,28 @@
+{
+    "Commands": [
+        {
+            "CommandId": "string",
+            "InstanceId": "string",
+            "DeploymentId": "string",
+            "CreatedAt": "string",
+            "AcknowledgedAt": "string",
+            "CompletedAt": "string",
+            "Status": "failed",
+            "ExitCode": 123,
+            "LogUrl": "string",
+            "Type": "string"
+        },
+        {
+            "CommandId": "string",
+            "InstanceId": "string",
+            "DeploymentId": "string",
+            "CreatedAt": "string",
+            "AcknowledgedAt": "string",
+            "CompletedAt": "string",
+            "Status": "skipped",
+            "ExitCode": 123,
+            "LogUrl": "string",
+            "Type": "string"
+        }
+    ]
+}
